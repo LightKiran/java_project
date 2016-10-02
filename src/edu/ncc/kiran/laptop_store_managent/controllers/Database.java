@@ -29,7 +29,7 @@ public class Database {
 
     public Database() {
         pc_name = "localhost";
-        db_name = "cp_00158132_kiran_duwal_batch14a";
+        db_name = "c_00158132_kiran_duwal_laptop_store";
         user_name = "root";
         password = "";
         driver = "com.mysql.jdbc.Driver";

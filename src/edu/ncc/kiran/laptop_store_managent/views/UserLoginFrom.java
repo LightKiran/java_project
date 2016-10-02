@@ -153,7 +153,7 @@ public class UserLoginFrom extends javax.swing.JFrame {
                 System.out.println("Welcome " + objUserInfo.getLogin_name());
                 //pass the objUserInfo to dashboard through parameterized constructor
                //-- AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
-                AdminDashboard adminDashboard = new AdminDashboard();
+                AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
                 adminDashboard.setVisible(true);//makes the frame visible
                 this.dispose(); //this closes the login frame.
             } else {

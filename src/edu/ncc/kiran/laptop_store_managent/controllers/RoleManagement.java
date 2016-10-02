@@ -41,29 +41,29 @@ public class RoleManagement extends Database{
     }
     
     
-   /* public Role findRoleByName(String name){
-        Role role = null;
+    public RoleInfo searchRoleByName(String name){
+        RoleInfo role = null;
         try {
-            String query = "SELECT * FROM role WHERE name = ?";
-            this.pstat = this.con.prepareStatement(query);
+            String query = "SELECT * FROM tbl_role WHERE role_type = ?";
+            this.pstat = this.conn.prepareStatement(query);
             this.pstat.setString(1, name);
             this.rs = this.pstat.executeQuery();
             while(this.rs.next()){
-                role = new Role();
-                role.setId(this.rs.getInt("id"));
-                role.setName(this.rs.getString("name"));
+                role = new RoleInfo();
+                role.setRole_id(this.rs.getInt("role_id"));
+                role.setRole_type(this.rs.getString("role_type"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RoleController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RoleManagement.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try {
                 this.rs.close();
                 this.pstat.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RoleManagement.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return role;
-    }*/
+    }
     
 }

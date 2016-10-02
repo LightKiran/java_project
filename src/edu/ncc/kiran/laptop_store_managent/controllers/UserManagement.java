@@ -26,6 +26,37 @@ public class UserManagement extends Database {
         conn = Database.conn;
     }
 
+    public boolean createNewUser(UserInfo user) {
+        boolean isUserCreated = false;
+        try {
+            String query = "INSERT INTO tbl_user VALUES(null,?,?,?,?,?,?,?,?,?)";
+            this.pstat = this.conn.prepareStatement(query);
+            this.pstat.setString(1, user.getFirst_name());
+            this.pstat.setString(2, user.getMiddle_name());
+            this.pstat.setString(3, user.getLast_name());
+            this.pstat.setString(4, user.getContact_no());
+            this.pstat.setString(5, user.getAddress());
+            this.pstat.setString(6, user.getEmail());
+            this.pstat.setString(7, user.getLogin_name());
+            this.pstat.setString(8, user.getLogin_password());
+            this.pstat.setInt(9, user.getRoleInfo().getRole_id());
+            int insert = this.pstat.executeUpdate();
+
+            if (insert > 0) {
+                isUserCreated = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                this.pstat.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return isUserCreated;
+    }
+
     public UserInfo verifyUsers(UserInfo user) {
         UserInfo objUserInfo = null;
         try {
