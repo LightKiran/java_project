@@ -7,13 +7,16 @@ package edu.ncc.kiran.laptop_store_managent.views;
 
 import edu.ncc.kiran.laptop_store_managent.controllers.CustomerTransactionManagement;
 import edu.ncc.kiran.laptop_store_managent.controllers.Database;
+import edu.ncc.kiran.laptop_store_managent.controllers.SupCtrl;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerInfo;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerTransactionInfo;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopInfo;
+import edu.ncc.kiran.laptop_store_managent.models.UserInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +30,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     /**
      * Creates new form AddNewCustomerTransaction
      */
+    UserInfo loggedInUserInfo;
     CustomerTransactionManagement cusTransMgmt;
     DefaultTableModel customerTransTbl;
     public Connection conn;
@@ -34,14 +38,13 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     public ResultSet rs;
     Database db = new Database();
 
-    public AddNewCustomerTransaction(java.awt.Frame parent, boolean modal) {
+    public AddNewCustomerTransaction(java.awt.Frame parent, boolean modal, UserInfo loggedInUserInfo) {
         super(parent, modal);
         initComponents();
         db.GetDbConnection();
         conn = db.conn;
-        //  showAllCustomerTransaction();
-        //  Fillcombodate();
-        // Fillcombo();
+        this.loggedInUserInfo = loggedInUserInfo;
+        showAllCustomerTransaction();
         fillComboCusName();
         fillComboLapModel();
     }
@@ -269,6 +272,24 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void showAllCustomerTransaction() {
+        cusTransMgmt = new CustomerTransactionManagement();
+        customerTransTbl = new DefaultTableModel();
+        ArrayList<CustomerTransactionInfo> cusTransactions = cusTransMgmt.listAllCustomerTransaction();
+        String[] columns = {"customer_transaction_id", "customer_id",/* "user_id",*/ "laptop_id",
+            "paid", "due", "total_cost", "date", "time", "user_id"};
+        customerTransTbl.setColumnIdentifiers(columns);
+        for (CustomerTransactionInfo cusTransaction : cusTransactions) {
+            customerTransTbl.addRow(new Object[]{cusTransaction.getCusTransId(), 
+                cusTransaction.getCusInfo().getFirst_name(), /*cusTransaction.getCusInfo().getUserInfo().getUser_id(),*/ cusTransaction.getLapInfo().getModel_no(),
+                cusTransaction.getPaid(), cusTransaction.getDue(),
+                cusTransaction.getTotal_cost(), cusTransaction.getDate(),
+                cusTransaction.getTime()});
+        }
+
+        tblCustomerTransaction.setModel(customerTransTbl);
+    }
+
     private void txtSrhDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSrhDateKeyReleased
         // TODO add your handling code here:
         try {
@@ -375,15 +396,14 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         CustomerTransactionInfo cusTransInfo = new CustomerTransactionInfo();
+        SupCtrl supCtrl = new SupCtrl();
 
         String cusName = (String) cmbCustomerName.getSelectedItem();
-        CustomerTransactionManagement cusTransMgmt2 = new CustomerTransactionManagement();
-        CustomerInfo objcusTransInfo = cusTransMgmt2.findCustomerInfoByName(cusName);
+        CustomerInfo objcusTransInfo = supCtrl.findCustomerInfoByName(cusName);
         cusTransInfo.setCusInfo(objcusTransInfo);
 
         String lapModel = (String) cmbLapModel.getSelectedItem();
-        CustomerTransactionManagement cusTransMgmt3 = new CustomerTransactionManagement();
-        LaptopInfo objLaptopInfo = cusTransMgmt3.findLaptopInfoByModel(lapModel);
+        LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
         cusTransInfo.setLapInfo(objLaptopInfo);
 
         cusTransInfo.setPaid(txtPaid.getText());
@@ -413,44 +433,44 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddNewCustomerTransaction dialog = new AddNewCustomerTransaction(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AddNewCustomerTransaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                AddNewCustomerTransaction dialog = new AddNewCustomerTransaction(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoadTable;

@@ -204,7 +204,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void jMenuItemCustomerTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransactionActionPerformed
         // TODO add your handling code here:
-        final AddNewCustomerTransaction objaddAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true);
+        final AddNewCustomerTransaction objaddAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
         objaddAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {

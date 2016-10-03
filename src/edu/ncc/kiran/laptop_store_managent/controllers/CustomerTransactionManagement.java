@@ -20,11 +20,18 @@ import java.util.logging.Logger;
  */
 public class CustomerTransactionManagement extends Database {
 
-//    private SupCtrl supCtr;
+    private SupCtrl supCtr;
+//    private CustomerManagement cusMgmt;
+//    private LaptopManagment lapMgmt;
+//    private LaptopBrandManagement lapBrndMgmt;
 //
-//    public CustomerTransactionManagement() {
-//        supCtr = new SupCtrl();
-//    }
+    public CustomerTransactionManagement() {
+        supCtr = new SupCtrl();
+//        cusMgmt = new CustomerManagement();
+//        lapMgmt = new LaptopManagment();
+//        lapBrndMgmt = new LaptopBrandManagement();
+    }
+    
     CustomerTransactionInfo objCusTransInfo = new CustomerTransactionInfo();
 
     //int checkExist;
@@ -42,7 +49,6 @@ public class CustomerTransactionManagement extends Database {
             this.pstat.setString(3, objCusTransInfo.getPaid());
             this.pstat.setString(4, objCusTransInfo.getDue());
             this.pstat.setString(5, objCusTransInfo.getTotal_cost());
-            
 
             int checkExist = this.pstat.executeUpdate();
 
@@ -73,19 +79,23 @@ public class CustomerTransactionManagement extends Database {
             while (rs.next()) {
                 CustomerTransactionInfo objCusTrans = new CustomerTransactionInfo();
                 objCusTrans.setCusTransId(this.rs.getInt("customer_transaction_id"));
-                objCusTrans.setDate(this.rs.getDate("date"));
-                objCusTrans.setTime(this.rs.getTime("time"));
+
+                int customerId = this.rs.getInt("customer_id");
+                //-  CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
+                CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
+                objCusTrans.setCusInfo(customerInfo);
+
+                int laptopId = this.rs.getInt("laptop_id");
+                LaptopInfo laptopInfo = supCtr.findLaptopInfoById(laptopId);
+                objCusTrans.setLapInfo(laptopInfo);
+
                 objCusTrans.setPaid(this.rs.getString("paid"));
                 objCusTrans.setDue(this.rs.getString("due"));
                 objCusTrans.setTotal_cost(this.rs.getString("total_cost"));
-                //objCusTrans.setCusId(this.rs.getString("tbl_customer_customer_id"));
-                //**      objCusTrans.setCustomer_id(this.rs.getInt("tbl_customer_customer_id"));
-                //-- objCusTrans.setCustomer_id(this.rs.getInt("tbl_customer_customer_id"));
-                int customerId = this.rs.getInt("tbl_customer_customer_id");
-                CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
-                objCusTrans.setCusInfo(customerInfo);
-                // objCusInfo.add(objCusTrans);
+                objCusTrans.setDate(this.rs.getDate("date"));
+                objCusTrans.setTime(this.rs.getTime("time"));
 
+                // objCusInfo.add(objCusTrans);
                 objCusInfo.add(objCusTrans);
             }
         } catch (SQLException ex) {
@@ -94,75 +104,75 @@ public class CustomerTransactionManagement extends Database {
         return objCusInfo;
     }
 
-    public CustomerInfo findCustomerInfoById(int id) {
-        CustomerInfo objCusInfo = null;
-        try {
-            String query = "SELECT * FROM tbl_customer WHERE customer_id = ?";
-            this.pstat = this.conn.prepareStatement(query);
-            this.pstat.setInt(1, id);
-            this.rs = this.pstat.executeQuery();
-            while (this.rs.next()) {
-                objCusInfo = new CustomerInfo();
-                objCusInfo.setCustomer_id(this.rs.getInt("customer_id"));
-                objCusInfo.setFirst_name(this.rs.getString("first_name"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return objCusInfo;
-    }
+//    public CustomerInfo findCustomerInfoById(int id) {
+//        CustomerInfo objCusInfo = null;
+//        try {
+//            String query = "SELECT * FROM tbl_customer WHERE customer_id = ?";
+//            this.pstat = this.conn.prepareStatement(query);
+//            this.pstat.setInt(1, id);
+//            this.rs = this.pstat.executeQuery();
+//            while (this.rs.next()) {
+//                objCusInfo = new CustomerInfo();
+//                objCusInfo.setCustomer_id(this.rs.getInt("customer_id"));
+//                objCusInfo.setFirst_name(this.rs.getString("first_name"));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return objCusInfo;
+//    }
+//
+//    public CustomerInfo findCustomerInfoByName(String name) {
+//        CustomerInfo objCusInfo = null;
+//        try {
+//            String query = "SELECT * FROM tbl_customer WHERE first_name = ?";
+//            this.pstat = this.conn.prepareStatement(query);
+//            this.pstat.setString(1, name);
+//            this.rs = this.pstat.executeQuery();
+//            while (this.rs.next()) {
+//                objCusInfo = new CustomerInfo();
+//                objCusInfo.setCustomer_id(this.rs.getInt("customer_id"));
+//                objCusInfo.setFirst_name(this.rs.getString("first_name"));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return objCusInfo;
+//    }
 
-    public CustomerInfo findCustomerInfoByName(String name) {
-        CustomerInfo objCusInfo = null;
-        try {
-            String query = "SELECT * FROM tbl_customer WHERE first_name = ?";
-            this.pstat = this.conn.prepareStatement(query);
-            this.pstat.setString(1, name);
-            this.rs = this.pstat.executeQuery();
-            while (this.rs.next()) {
-                objCusInfo = new CustomerInfo();
-                objCusInfo.setCustomer_id(this.rs.getInt("customer_id"));
-                objCusInfo.setFirst_name(this.rs.getString("first_name"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return objCusInfo;
-    }
-
-    public LaptopInfo findLaptopInfoById(int id) {
-        LaptopInfo objLapInfo = null;
-        try {
-            String query = "SELECT * FROM tbl_laptop WHERE laptop_id = ?";
-            this.pstat = this.conn.prepareStatement(query);
-            this.pstat.setInt(1, id);
-            this.rs = this.pstat.executeQuery();
-            while (this.rs.next()) {
-                objLapInfo = new LaptopInfo();
-                objLapInfo.setLaptop_id(this.rs.getInt("laptop_id"));
-                objLapInfo.setModel_no(this.rs.getString("model_no"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return objLapInfo;
-    }
-
-    public LaptopInfo findLaptopInfoByModel(String model) {
-        LaptopInfo objLapInfo = null;
-        try {
-            String query = "SELECT * FROM tbl_laptop WHERE model_no = ?";
-            this.pstat = this.conn.prepareStatement(query);
-            this.pstat.setString(1, model);
-            this.rs = this.pstat.executeQuery();
-            while (this.rs.next()) {
-                objLapInfo = new LaptopInfo();
-                objLapInfo.setLaptop_id(this.rs.getInt("laptop_id"));
-                objLapInfo.setModel_no(this.rs.getString("model_no"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return objLapInfo;
-    }
+//    public LaptopInfo findLaptopInfoById(int id) {
+//        LaptopInfo objLapInfo = null;
+//        try {
+//            String query = "SELECT * FROM tbl_laptop WHERE laptop_id = ?";
+//            this.pstat = this.conn.prepareStatement(query);
+//            this.pstat.setInt(1, id);
+//            this.rs = this.pstat.executeQuery();
+//            while (this.rs.next()) {
+//                objLapInfo = new LaptopInfo();
+//                objLapInfo.setLaptop_id(this.rs.getInt("laptop_id"));
+//                objLapInfo.setModel_no(this.rs.getString("model_no"));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return objLapInfo;
+//    }
+//
+//    public LaptopInfo findLaptopInfoByModel(String model) {
+//        LaptopInfo objLapInfo = null;
+//        try {
+//            String query = "SELECT * FROM tbl_laptop WHERE model_no = ?";
+//            this.pstat = this.conn.prepareStatement(query);
+//            this.pstat.setString(1, model);
+//            this.rs = this.pstat.executeQuery();
+//            while (this.rs.next()) {
+//                objLapInfo = new LaptopInfo();
+//                objLapInfo.setLaptop_id(this.rs.getInt("laptop_id"));
+//                objLapInfo.setModel_no(this.rs.getString("model_no"));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CustomerTransactionManagement.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return objLapInfo;
+//    }
 }
