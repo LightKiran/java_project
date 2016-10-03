@@ -19,6 +19,7 @@ public class UserLoginFrom extends javax.swing.JFrame {
      */
     public UserLoginFrom() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

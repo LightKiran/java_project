@@ -5,6 +5,7 @@
  */
 package edu.ncc.kiran.laptop_store_managent.views;
 
+import edu.ncc.kiran.laptop_store_managent.controllers.LaptopBrandManagement;
 import edu.ncc.kiran.laptop_store_managent.controllers.LaptopManagment;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopBrandInfo;
 import edu.ncc.kiran.laptop_store_managent.models.UserInfo;
@@ -87,9 +88,9 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
         objLaptopBrandInfo.setBrandname(txtLapBrand.getText());
         objLaptopBrandInfo.setUserInfo(loggedInUserInfo);
         
-        LaptopManagment objLaptopManagment = new LaptopManagment();
+        LaptopBrandManagement objLaptopBrandManagment = new LaptopBrandManagement();
         
-        boolean isLaptopBrandExist = objLaptopManagment.CreateNewLaptopBrand(objLaptopBrandInfo);
+        boolean isLaptopBrandExist = objLaptopBrandManagment.CreateNewLaptopBrand(objLaptopBrandInfo);
         
         if(isLaptopBrandExist){
            JOptionPane.showMessageDialog(null, "New laptop brand added sucessfully"); 
