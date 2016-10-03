@@ -49,6 +49,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenuItemUser = new javax.swing.JMenuItem();
         jMenuItemLaptopBrand = new javax.swing.JMenuItem();
         jMenuItemLaptop = new javax.swing.JMenuItem();
+        jMenuItemCustomer = new javax.swing.JMenuItem();
+        jMenuItemCustomerTransaction = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
 
@@ -104,6 +106,22 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
         jMenuAdd.add(jMenuItemLaptop);
+
+        jMenuItemCustomer.setText("Customer");
+        jMenuItemCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemCustomer);
+
+        jMenuItemCustomerTransaction.setText("Customer Transaction");
+        jMenuItemCustomerTransaction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerTransactionActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemCustomerTransaction);
 
         jMenuBar1.add(jMenuAdd);
 
@@ -170,6 +188,34 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.validate();
     }//GEN-LAST:event_jMenuItemLaptopActionPerformed
 
+    private void jMenuItemCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerActionPerformed
+        // TODO add your handling code here:
+        final AddNewCustomer objaddAddNewCustomer = new AddNewCustomer(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objaddAddNewCustomer.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objaddAddNewCustomer.dispose();
+            }
+        });
+        objaddAddNewCustomer.setLocationRelativeTo(this);
+        objaddAddNewCustomer.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerActionPerformed
+
+    private void jMenuItemCustomerTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransactionActionPerformed
+        // TODO add your handling code here:
+        final AddNewCustomerTransaction objaddAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true);
+        objaddAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objaddAddNewCustomerTransaction.dispose();
+            }
+        });
+        objaddAddNewCustomerTransaction.setLocationRelativeTo(this);
+        objaddAddNewCustomerTransaction.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerTransactionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -216,6 +262,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemCustomer;
+    private javax.swing.JMenuItem jMenuItemCustomerTransaction;
     private javax.swing.JMenuItem jMenuItemLaptop;
     private javax.swing.JMenuItem jMenuItemLaptopBrand;
     private javax.swing.JMenuItem jMenuItemUser;
