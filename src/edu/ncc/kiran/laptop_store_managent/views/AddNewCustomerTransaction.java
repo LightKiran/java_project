@@ -44,9 +44,9 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         db.GetDbConnection();
         conn = db.conn;
         this.loggedInUserInfo = loggedInUserInfo;
-        showAllCustomerTransaction();
+//        showAllCustomerTransaction();
         fillComboCusName();
-        fillComboLapModel();
+//        fillComboLapModel();
     }
 
     /**
@@ -76,8 +76,6 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        cmbLapModel = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -157,16 +155,6 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("Laptop model no :");
-
-        cmbLapModel.setEditable(true);
-        cmbLapModel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plz laptop model" }));
-        cmbLapModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbLapModelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,7 +166,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel1)
@@ -202,9 +190,8 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                                         .addComponent(btnPrint))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbCustomerName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(336, 336, 336)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(152, Short.MAX_VALUE)
@@ -214,12 +201,6 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                         .addGap(134, 134, 134)
                         .addComponent(cmbFillDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(cmbLapModel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(443, 443, 443))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,15 +211,11 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSrhDue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSrhDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cmbLapModel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,8 +227,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18))
+                                .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -266,7 +242,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
                     .addComponent(btnPrint))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,7 +354,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         }
     }
 
-    private void fillComboLapModel() {
+   /* private void fillComboLapModel() {
         try {
             String sql = "select model_no from tbl_laptop";
             pstat = conn.prepareStatement(sql);
@@ -391,7 +367,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error = " + e);
         }
-    }
+    }*/
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
@@ -402,18 +378,16 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         CustomerInfo objcusTransInfo = supCtrl.findCustomerInfoByName(cusName);
         cusTransInfo.setCusInfo(objcusTransInfo);
 
-        String lapModel = (String) cmbLapModel.getSelectedItem();
-        LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
-        cusTransInfo.setLapInfo(objLaptopInfo);
+//        String lapModel = (String) cmbLapModel.getSelectedItem();
+//        LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
+//        cusTransInfo.setLapInfo(objLaptopInfo);
 
         cusTransInfo.setPaid(txtPaid.getText());
         cusTransInfo.setDue(txtDue.getText());
         cusTransInfo.setTotal_cost(txtTotalCost.getText());
-        //        Object ob =  cusTransInfo.getCusInfo().getCustomer_id();
-        //        cusTransInfo.setCusInfo((CustomerTransactionInfo) ob);
-        // cusTransInfo.setLaptopbrand((int) cmbLaptopBrand.getSelectedIndex());
+        cusTransInfo.setUserInfo(loggedInUserInfo);
+        //System.out.println(cusTransInfo.setUserInfo(loggedInUserInfo));
 
-        //boolean isUserExist = objUserManage.AddNewUser(objUserInfo);
         CustomerTransactionManagement cusTransMgmt = new CustomerTransactionManagement();
 
         boolean isCustomerTransExist = cusTransMgmt.addNewCustomerTransaction(cusTransInfo);
@@ -425,10 +399,6 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Error to create customer transaction details");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void cmbLapModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLapModelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbLapModelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,13 +449,11 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox cmbCustomerName;
     private javax.swing.JComboBox cmbFillDate;
-    private javax.swing.JComboBox cmbLapModel;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCustomerTransaction;
     private javax.swing.JTextField txtDue;

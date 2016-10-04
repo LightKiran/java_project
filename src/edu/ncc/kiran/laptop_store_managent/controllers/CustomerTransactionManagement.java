@@ -9,6 +9,7 @@ import static edu.ncc.kiran.laptop_store_managent.controllers.Database.conn;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerInfo;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerTransactionInfo;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopInfo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,34 +26,65 @@ public class CustomerTransactionManagement extends Database {
 //    private LaptopManagment lapMgmt;
 //    private LaptopBrandManagement lapBrndMgmt;
 //
+
     public CustomerTransactionManagement() {
         supCtr = new SupCtrl();
 //        cusMgmt = new CustomerManagement();
 //        lapMgmt = new LaptopManagment();
 //        lapBrndMgmt = new LaptopBrandManagement();
     }
-    
+
     CustomerTransactionInfo objCusTransInfo = new CustomerTransactionInfo();
 
     //int checkExist;
+    int customerMaxTransID;
+    int hey2;
+
     public boolean addNewCustomerTransaction(CustomerTransactionInfo objCusTransInfo) {
         boolean isCustomerTransExist = false;
         GetDbConnection();
+
         try {
 
-            String sql = "insert into tbl_customer_transaction (customer_transaction_id, customer_id,"
-                    + "laptop_id, paid, due, total_cost, date, time) "
-                    + "values (null,?,?,?,?,?,CURDATE(),CURTIME())";
+            String sql = "insert into tbl_customer_transaction (customer_transaction_id, "
+                    + "paid, due, total_cost, date, time, customer_id) "
+                    + "values (null,?,?,?,CURDATE(),CURTIME(),?)";
             this.pstat = this.conn.prepareStatement(sql);
-            this.pstat.setInt(1, objCusTransInfo.getCusInfo().getCustomer_id());
-            this.pstat.setInt(2, objCusTransInfo.getLapInfo().getLaptop_id());
-            this.pstat.setString(3, objCusTransInfo.getPaid());
-            this.pstat.setString(4, objCusTransInfo.getDue());
-            this.pstat.setString(5, objCusTransInfo.getTotal_cost());
+            // this.pstat.setInt(2, objCusTransInfo.getLapInfo().getLaptop_id());
+            this.pstat.setString(1, objCusTransInfo.getPaid());
+            this.pstat.setString(2, objCusTransInfo.getDue());
+            this.pstat.setString(3, objCusTransInfo.getTotal_cost());
+            this.pstat.setInt(4, objCusTransInfo.getCusInfo().getCustomer_id());
+
+            int hey = objCusTransInfo.getUserInfo().getUser_id();
+            System.out.println("loggin" + hey);
 
             int checkExist = this.pstat.executeUpdate();
 
-            if (checkExist > 0) {
+            hey2 = objCusTransInfo.getUserInfo().getUser_id();
+            System.out.println("loggin kiran" + hey2);
+
+            ResultSet rs = conn.createStatement().executeQuery("select MAX(customer_transaction_id) from tbl_customer_transaction");
+
+            if (rs.next()) {
+                customerMaxTransID = rs.getInt(1);
+                System.out.println("Recent input value of pk is  " + customerMaxTransID);
+
+            }
+
+            //String sql3 = "insert into customerservice(CustomerID,ServiceID) values(" + customerID + "," + serviceID + ");";
+            String sql3 = "insert into tbl_user_customer_transaction(user_id,customer_transaction_id) "
+                    + "values(" + hey2 + "," + customerMaxTransID + ")";
+//            String sql3 = "insert into tbl_user_customer_transaction(user_id,customer_transaction_id) "
+//                    + "values(?,?)";
+
+//            this.pstat.setInt(1, hey2);
+//            this.pstat.setInt(2, customerMaxTransID);
+
+            pstat = conn.prepareStatement(sql3);
+            int checkExist2 = this.pstat.executeUpdate();
+
+            if (checkExist > 0 || checkExist2 > 0) {
                 isCustomerTransExist = true;
             }
 
@@ -139,7 +171,6 @@ public class CustomerTransactionManagement extends Database {
 //        }
 //        return objCusInfo;
 //    }
-
 //    public LaptopInfo findLaptopInfoById(int id) {
 //        LaptopInfo objLapInfo = null;
 //        try {

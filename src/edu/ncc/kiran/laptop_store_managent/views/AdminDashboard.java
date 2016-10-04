@@ -155,7 +155,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void jMenuItemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserActionPerformed
         // TODO add your handling code here:
-        AddNewUserPanel users = new AddNewUserPanel(loggedInUserInfo);
+        AddNewUserPanel users = new AddNewUserPanel();
         this.setContentPane(users);
         this.validate();
     }//GEN-LAST:event_jMenuItemUserActionPerformed

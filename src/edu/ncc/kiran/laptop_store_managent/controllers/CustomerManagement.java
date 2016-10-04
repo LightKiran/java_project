@@ -28,8 +28,8 @@ public class CustomerManagement extends Database {
         try {
 
             String sql = "insert into tbl_customer (customer_id, first_name, middle_name,"
-                    + " last_name, contact_no, address, email, user_id) "
-                    + "values (null,?,?,?,?,?,?,?)";
+                    + " last_name, contact_no, address, email) "
+                    + "values (null,?,?,?,?,?,?)";
             this.pstat = this.conn.prepareStatement(sql);
             this.pstat.setString(1, objCusInfo.getFirst_name());
             this.pstat.setString(2, objCusInfo.getMiddle_name());
@@ -37,7 +37,7 @@ public class CustomerManagement extends Database {
             this.pstat.setString(4, objCusInfo.getContact_no());
             this.pstat.setString(5, objCusInfo.getAddress());
             this.pstat.setString(6, objCusInfo.getEmail());
-            pstat.setInt(7, objCusInfo.getUserInfo().getUser_id());
+//            pstat.setInt(7, objCusInfo.getUserInfo().getUser_id());
 
             int checkExist = this.pstat.executeUpdate();
 

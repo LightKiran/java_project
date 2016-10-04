@@ -86,7 +86,7 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
         LaptopBrandInfo objLaptopBrandInfo = new LaptopBrandInfo();
         
         objLaptopBrandInfo.setBrandname(txtLapBrand.getText());
-        objLaptopBrandInfo.setUserInfo(loggedInUserInfo);
+        //objLaptopBrandInfo.setUserInfo(loggedInUserInfo);
         
         LaptopBrandManagement objLaptopBrandManagment = new LaptopBrandManagement();
         

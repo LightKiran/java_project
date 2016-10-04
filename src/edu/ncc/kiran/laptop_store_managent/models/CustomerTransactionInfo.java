@@ -22,6 +22,7 @@ public class CustomerTransactionInfo {
     private String total_cost;
     private Date date;
     private Time time;
+    private UserInfo userInfo;
 
     public int getCusTransId() {
         return cusTransId;
@@ -85,6 +86,14 @@ public class CustomerTransactionInfo {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     
     

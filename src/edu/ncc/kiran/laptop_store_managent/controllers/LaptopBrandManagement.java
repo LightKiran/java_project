@@ -19,13 +19,13 @@ import java.util.logging.Logger;
 public class LaptopBrandManagement extends Database {
 
     public boolean CreateNewLaptopBrand(LaptopBrandInfo objLapBrand) {
-        String sql = "insert into tbl_laptopbrand (laptopbrand_id, brandname, user_id)"
-                + " values (null,?,?)";
+        String sql = "insert into tbl_laptopbrand (laptopbrand_id, brandname)"
+                + " values (null,?)";
         boolean isLaptopBrandExist = false;
         try {
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, objLapBrand.getBrandname());
-            pstat.setInt(2, objLapBrand.getUserInfo().getUser_id());
+         //   pstat.setInt(2, objLapBrand.getUserInfo().getUser_id());
             pstat.executeUpdate();
             pstat.close();
             CloseDbConnection();

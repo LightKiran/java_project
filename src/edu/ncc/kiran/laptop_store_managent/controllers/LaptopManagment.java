@@ -42,8 +42,8 @@ public class LaptopManagment extends Database {
         try {
 
             String sql = "insert into tbl_laptop (laptop_id, model_no, harddisk, ram, graphics, generation, "
-                    + "processor, price, laptopbrand_id, user_id) "
-                    + "values (null,?,?,?,?,?,?,?,?,?)";
+                    + "processor, price, laptopbrand_id) "
+                    + "values (null,?,?,?,?,?,?,?,?)";
             this.pstat = this.conn.prepareStatement(sql);
             this.pstat.setString(1, lapInfo.getModel_no());
             this.pstat.setString(2, lapInfo.getHarddisk());
@@ -53,7 +53,7 @@ public class LaptopManagment extends Database {
             this.pstat.setString(6, lapInfo.getProcessor());
             this.pstat.setDouble(7, lapInfo.getPrice());
             this.pstat.setInt(8, lapInfo.getLapBrandInfo().getLaptopbrand_id());
-            this.pstat.setInt(9, lapInfo.getUserInfo().getUser_id());
+        //    this.pstat.setInt(9, lapInfo.getUserInfo().getUser_id());
 //--            this.pstat.setInt(7, lapInfo.getLaptopbrand());
 
             int checkExist = this.pstat.executeUpdate();

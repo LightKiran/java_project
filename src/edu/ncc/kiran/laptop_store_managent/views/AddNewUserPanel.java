@@ -24,17 +24,16 @@ public class AddNewUserPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddNewUser
      */
-    UserInfo loggedInUserInfo;
+   
     public Connection conn;
     public PreparedStatement pstat;
     public ResultSet rs;
     Database db = new Database();
 
-    public AddNewUserPanel(UserInfo loggedInUserInfo) {
+    public AddNewUserPanel() {
         initComponents();
         db.GetDbConnection();
         conn = Database.conn;
-        this.loggedInUserInfo = loggedInUserInfo;
         Fillcomborole();
     }
 

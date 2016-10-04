@@ -199,7 +199,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
         objCusInfo.setContact_no(txtContactNo.getText());
         objCusInfo.setAddress(txtAddress.getText());
         objCusInfo.setEmail(txtEmail.getText());
-        objCusInfo.setUserInfo(loggedInUserInfo);
+        //objCusInfo.setUserInfo(loggedInUserInfo);
 
         //boolean isUserExist = objUserManage.AddNewUser(objUserInfo);
         CustomerManagement objCusMgmt = new CustomerManagement();
