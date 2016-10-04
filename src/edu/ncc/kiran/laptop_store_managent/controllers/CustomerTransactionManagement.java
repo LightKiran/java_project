@@ -88,7 +88,6 @@ public class CustomerTransactionManagement extends Database {
                 isCustomerTransExist = true;
             }
 
-            //CloseDbConnection();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
 
