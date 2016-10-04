@@ -44,7 +44,7 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         db.GetDbConnection();
         conn = db.conn;
         this.loggedInUserInfo = loggedInUserInfo;
-//        showAllCustomerTransaction();
+        showAllCustomerTransaction();
         fillComboCusName();
 //        fillComboLapModel();
     }
@@ -252,15 +252,14 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         cusTransMgmt = new CustomerTransactionManagement();
         customerTransTbl = new DefaultTableModel();
         ArrayList<CustomerTransactionInfo> cusTransactions = cusTransMgmt.listAllCustomerTransaction();
-        String[] columns = {"customer_transaction_id", "customer_id",/* "user_id",*/ "laptop_id",
-            "paid", "due", "total_cost", "date", "time", "user_id"};
+        String[] columns = {"customer_transaction_id",/* "user_id",*/
+            "paid", "due", "total_cost", "date", "time", "customer_id"};
         customerTransTbl.setColumnIdentifiers(columns);
         for (CustomerTransactionInfo cusTransaction : cusTransactions) {
-            customerTransTbl.addRow(new Object[]{cusTransaction.getCusTransId(), 
-                cusTransaction.getCusInfo().getFirst_name(), /*cusTransaction.getCusInfo().getUserInfo().getUser_id(),*/ cusTransaction.getLapInfo().getModel_no(),
+            customerTransTbl.addRow(new Object[]{ cusTransaction.getCusTransId(),/*cusTransaction.getCusInfo().getUserInfo().getUser_id(),*/ 
                 cusTransaction.getPaid(), cusTransaction.getDue(),
                 cusTransaction.getTotal_cost(), cusTransaction.getDate(),
-                cusTransaction.getTime()});
+                cusTransaction.getTime(),cusTransaction.getCusInfo().getCustomer_id()});
         }
 
         tblCustomerTransaction.setModel(customerTransTbl);

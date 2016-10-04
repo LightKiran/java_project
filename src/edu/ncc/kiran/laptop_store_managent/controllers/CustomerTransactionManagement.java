@@ -80,7 +80,6 @@ public class CustomerTransactionManagement extends Database {
 
 //            this.pstat.setInt(1, hey2);
 //            this.pstat.setInt(2, customerMaxTransID);
-
             pstat = conn.prepareStatement(sql3);
             int checkExist2 = this.pstat.executeUpdate();
 
@@ -111,20 +110,19 @@ public class CustomerTransactionManagement extends Database {
                 CustomerTransactionInfo objCusTrans = new CustomerTransactionInfo();
                 objCusTrans.setCusTransId(this.rs.getInt("customer_transaction_id"));
 
-                int customerId = this.rs.getInt("customer_id");
-                //-  CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
-                CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
-                objCusTrans.setCusInfo(customerInfo);
-
-                int laptopId = this.rs.getInt("laptop_id");
-                LaptopInfo laptopInfo = supCtr.findLaptopInfoById(laptopId);
-                objCusTrans.setLapInfo(laptopInfo);
-
+//                int laptopId = this.rs.getInt("laptop_id");
+//                LaptopInfo laptopInfo = supCtr.findLaptopInfoById(laptopId);
+//                objCusTrans.setLapInfo(laptopInfo);
                 objCusTrans.setPaid(this.rs.getString("paid"));
                 objCusTrans.setDue(this.rs.getString("due"));
                 objCusTrans.setTotal_cost(this.rs.getString("total_cost"));
                 objCusTrans.setDate(this.rs.getDate("date"));
                 objCusTrans.setTime(this.rs.getTime("time"));
+
+                int customerId = this.rs.getInt("customer_id");
+                //-  CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
+                CustomerInfo customerInfo = supCtr.findCustomerInfoById(customerId);
+                objCusTrans.setCusInfo(customerInfo);
 
                 // objCusInfo.add(objCusTrans);
                 objCusInfo.add(objCusTrans);
