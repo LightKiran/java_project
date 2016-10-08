@@ -18,7 +18,7 @@ public class CustomerInfo {
     private String contact_no;
     private String address;
     private String email;
-    private UserInfo userInfo;
+    private LaptopInfo lapInfo;
 
     public CustomerInfo(int customer_id, String first_name, String middle_name,
             String last_name, String contact_no, String address, String email, UserInfo userInfo) {
@@ -29,7 +29,7 @@ public class CustomerInfo {
         this.contact_no = contact_no;
         this.address = address;
         this.email = email;
-        this.userInfo = userInfo;
+        this.lapInfo = lapInfo;
     }
 
     public CustomerInfo() {
@@ -40,7 +40,7 @@ public class CustomerInfo {
         this.contact_no = contact_no;
         this.address = address;
         this.email = email;
-        this.userInfo = userInfo;
+        this.lapInfo = lapInfo;
     }
 
     public int getCustomer_id() {
@@ -99,12 +99,12 @@ public class CustomerInfo {
         this.email = email;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public LaptopInfo getLapInfo() {
+        return lapInfo;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setLapInfo(LaptopInfo lapInfo) {
+        this.lapInfo = lapInfo;
     }
 
     

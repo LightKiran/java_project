@@ -51,8 +51,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenuItemLaptop = new javax.swing.JMenuItem();
         jMenuItemCustomer = new javax.swing.JMenuItem();
         jMenuItemCustomerTransaction = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
+        jMenuCustomerTransaction = new javax.swing.JMenu();
+        jMenuItemCustomerTransViewUpdate = new javax.swing.JMenuItem();
+        jMenuCustomer = new javax.swing.JMenu();
+        jMenuItemCustomerViewUpdate = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -125,11 +127,19 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAdd);
 
-        jMenu5.setText("Edit");
-        jMenuBar1.add(jMenu5);
+        jMenuCustomerTransaction.setText("Customer Transaction");
 
-        jMenu7.setText("jMenu7");
-        jMenuBar1.add(jMenu7);
+        jMenuItemCustomerTransViewUpdate.setText("View / Update");
+        jMenuCustomerTransaction.add(jMenuItemCustomerTransViewUpdate);
+
+        jMenuBar1.add(jMenuCustomerTransaction);
+
+        jMenuCustomer.setText("Customer");
+
+        jMenuItemCustomerViewUpdate.setText("View / Update");
+        jMenuCustomer.add(jMenuItemCustomerViewUpdate);
+
+        jMenuBar1.add(jMenuCustomer);
 
         setJMenuBar(jMenuBar1);
 
@@ -257,13 +267,15 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCustomer;
+    private javax.swing.JMenu jMenuCustomerTransaction;
     private javax.swing.JMenuItem jMenuItemCustomer;
+    private javax.swing.JMenuItem jMenuItemCustomerTransViewUpdate;
     private javax.swing.JMenuItem jMenuItemCustomerTransaction;
+    private javax.swing.JMenuItem jMenuItemCustomerViewUpdate;
     private javax.swing.JMenuItem jMenuItemLaptop;
     private javax.swing.JMenuItem jMenuItemLaptopBrand;
     private javax.swing.JMenuItem jMenuItemUser;

@@ -102,15 +102,29 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
+        <Menu class="javax.swing.JMenu" name="jMenuCustomerTransaction">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="text" type="java.lang.String" value="Customer Transaction"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCustomerTransViewUpdate">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View / Update"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu7">
+        <Menu class="javax.swing.JMenu" name="jMenuCustomer">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenu7"/>
+            <Property name="text" type="java.lang.String" value="Customer"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCustomerViewUpdate">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View / Update"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
