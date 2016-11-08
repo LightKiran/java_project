@@ -39,8 +39,10 @@ public class UserLoginFrom extends javax.swing.JFrame {
         lblErr = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
+        btnHelp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Laptop Store Management");
 
         jLabel1.setFont(new java.awt.Font("Bookman Old Style", 0, 14)); // NOI18N
         jLabel1.setText("User Name : ");
@@ -74,39 +76,49 @@ public class UserLoginFrom extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bookman Old Style", 0, 14)); // NOI18N
         jLabel2.setText("Password :");
 
+        btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblErr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(111, 111, 111)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(btnLogin)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancel))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(btnLogin)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCancel))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(btnHelp)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHelp))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +133,7 @@ public class UserLoginFrom extends javax.swing.JFrame {
                     .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,105 +145,77 @@ public class UserLoginFrom extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        // set value to UserInfo.
+
         String loginName = txtUser.getText();
         String loginPassword = String.valueOf(txtPass.getPassword());
-        UserInfo user = new UserInfo();
 
-        user.setLogin_name(loginName);
-        user.setLogin_password(loginPassword);
-                        //-------------------------
+//        if (!Validate.checkEmpty(loginName)) {
+//            if (!Validate.checkEmpty(loginPassword)) {
+//                if (!Validate.checkLength(loginName)) {
+//                    if (!Validate.checkPasswordLength(loginPassword)) {
+                        UserInfo user = new UserInfo();
 
-        //pass UserInfo object to controller
-        UserManagement userMgmt = new UserManagement();
-        UserInfo objUserInfo = userMgmt.verifyUsers(user);
+                        user.setLogin_name(loginName);
+                        user.setLogin_password(loginPassword);
 
-        //Check user role type and initialize their dashboard
-        if (objUserInfo != null) {
-            if ("admin".equalsIgnoreCase(objUserInfo.getRoleInfo().getRole_type())) {
-                //Initialize Admin dashboard
-                System.out.println("Welcome " + objUserInfo.getLogin_name());
-                //pass the objUserInfo to dashboard through parameterized constructor
-               //-- AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
-                AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
-                adminDashboard.setVisible(true);//makes the frame visible
-                this.dispose(); //this closes the login frame.
-            } else {
-                //Initialize tutor dashboard
-               StaffDashboard staffDashboard = new StaffDashboard();
-                staffDashboard.setVisible(true);
-                this.dispose();
-            }
-        }
-            /* String loginName = txtUser.getText();
-             String loginPassword = String.valueOf(txtPass.getPassword());
+                        UserManagement userMgmt = new UserManagement();
+                        UserInfo objUserInfo = userMgmt.verifyUsers(user);
 
-             if (!ValidateLoginForm.checkNull(loginName)) {
-             if (!ValidateLoginForm.checkNull(loginPassword)) {
-             if (!ValidateLoginForm.checkLen(loginName)) {
-             if (!ValidateLoginForm.checkLen(loginPassword)) {
-             // set value to UserInfo.
-             UserInfo user = new UserInfo();
-             user.setLoginPassword(loginPassword);
-             user.setLoginName(loginName);
-             //-------------------------
-
-             //pass UserInfo object to controller
-             UserControl userCtrl = new UserControl();
-             UserInfo objUserInfo = userCtrl.verifyUsers(user);
-
-             //Check user role type and initialize their dashboard
-             if (objUserInfo != null) {
-             if ("Admin".equalsIgnoreCase(objUserInfo.getRole().getRoleName())) {
-             //Initialize Admin dashboard
-             System.out.println("Welcome " + objUserInfo.getLoginName());
-             //pass the objUserInfo to dashboard through parameterized constructor
-             AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
-             adminDashboard.setVisible(true);//makes the frame visible
-             this.dispose(); //this closes the login frame.
-             } else if ("Tutor".equalsIgnoreCase(objUserInfo.getRole().getRoleName())) {
-             //Initialize tutor dashboard
-             TutorDashboard tutorDashboard = new TutorDashboard();
-             tutorDashboard.setVisible(true);
-             this.dispose();
-             } else {
-             //Initialize Student dashboard
-
-             StudentDashboard studentDashboard = new StudentDashboard(objUserInfo);
-             studentDashboard.setVisible(true);
-             this.dispose();
-             }
-             } else {
-             lblErr.setText("Invalid user or Password");
-             lblErr.setVisible(true);
-             }
-
-             } else {
-             //Password length is less or greater.
-             lblErr.setText("Invalid length.\n Password length should be between 2-15.");
-             lblErr.setVisible(true);
-             }
-             } else {
-             // loginName length is less or greater than 2 - 50
-             lblErr.setText("Invalid length. \n Username length should be between 2-15.");
-             lblErr.setVisible(true);
-             }
-             } else {
-             //loginPassword is empty display error msg.
-             lblErr.setText("loginPassword can not be empty.");
-             lblErr.setVisible(true);
-             }
-             } else {
-             //username is empty display error msg.
-             lblErr.setText("username can not be empty.");
-             lblErr.setVisible(true);
-             }*/
+                        if (objUserInfo != null) {
+                            if ("admin".equalsIgnoreCase(objUserInfo.getRoleInfo().getRole_type())) {
+                                System.out.println("Welcome " + objUserInfo.getLogin_name());
+                                AdminDashboard adminDashboard = new AdminDashboard(objUserInfo);
+                                adminDashboard.setVisible(true);
+                                this.dispose();
+                            } else {
+                                StaffDashboard staffDashboard = new StaffDashboard(objUserInfo);
+                                staffDashboard.setVisible(true);
+                                this.dispose();
+                            }
+                        } //else {
+//                            lblErr.setText("Invalid user or Password");
+//                            lblErr.setVisible(true);
+//                        }
+//                    } else {
+//                        //Password length is less or greater.
+//                        lblErr.setText("Invalid length.\n Password length should be between 5-15.");
+//                        lblErr.setVisible(true);
+//                    }
+//                } else {
+//                    // loginName length is less or greater than 2 - 50
+//                    lblErr.setText("Invalid length. \n login name length should be between 3-15.");
+//                    lblErr.setVisible(true);
+//                }
+//            } else {
+//                //loginPassword is empty display error msg.
+//                lblErr.setText("login Password can not be empty.");
+//                lblErr.setVisible(true);
+//            }
+//        } else {
+//            //username is empty display error msg.
+//            lblErr.setText("login name can not be empty.");
+//            lblErr.setVisible(true);
+//        }
+ 
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+        final Help objaddHelp = new Help(new javax.swing.JFrame(), true);
+        objaddHelp.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objaddHelp.dispose();
+            }
+        });
+        objaddHelp.setLocationRelativeTo(this);
+        objaddHelp.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_btnHelpActionPerformed
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -269,6 +253,7 @@ public class UserLoginFrom extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
