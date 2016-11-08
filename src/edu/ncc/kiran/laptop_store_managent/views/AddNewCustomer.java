@@ -7,6 +7,7 @@ package edu.ncc.kiran.laptop_store_managent.views;
 
 import edu.ncc.kiran.laptop_store_managent.controllers.CustomerManagement;
 import edu.ncc.kiran.laptop_store_managent.controllers.Database;
+import edu.ncc.kiran.laptop_store_managent.controllers.LaptopManagment;
 import edu.ncc.kiran.laptop_store_managent.controllers.SupCtrl;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerInfo;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopInfo;
@@ -14,7 +15,9 @@ import edu.ncc.kiran.laptop_store_managent.models.UserInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,10 +28,12 @@ public class AddNewCustomer extends javax.swing.JDialog {
     /**
      * Creates new form AddNewCustomer
      */
+    LaptopManagment lapMgmt;
     UserInfo loggedInUserInfo;
     private Connection conn;
     private PreparedStatement pstat;
     private ResultSet rs;
+    DefaultTableModel laptopTbl;
     Database db = new Database();
 
     public AddNewCustomer(java.awt.Frame parent, boolean modal, UserInfo loggedInUserInfo) {
@@ -38,6 +43,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
         conn = db.conn;
         this.loggedInUserInfo = loggedInUserInfo;
         fillComboLapModel();
+        showAllLaptop();
     }
 
     /**
@@ -67,6 +73,9 @@ public class AddNewCustomer extends javax.swing.JDialog {
         btnReset = new javax.swing.JButton();
         lblEmail1 = new javax.swing.JLabel();
         cmbLapModel = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLaptops = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,7 +85,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel7.setText("Add New Customer");
+        jLabel7.setText("All laptop details");
 
         lblAddress.setText("Address :");
 
@@ -118,16 +127,28 @@ public class AddNewCustomer extends javax.swing.JDialog {
 
         cmbLapModel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "please select" }));
 
+        tblLaptops.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblLaptops);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel8.setText("Add New Customer");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,15 +173,25 @@ public class AddNewCustomer extends javax.swing.JDialog {
                                 .addGap(26, 26, 26)
                                 .addComponent(btnReset)
                                 .addGap(32, 32, 32)
-                                .addComponent(btnCancel)))))
-                .addContainerGap(323, Short.MAX_VALUE))
+                                .addComponent(btnCancel))
+                            .addComponent(jLabel8)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +226,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
                     .addComponent(btnCancel)
                     .addComponent(btnSave)
                     .addComponent(btnReset))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -203,8 +234,23 @@ public class AddNewCustomer extends javax.swing.JDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    public final void showAllLaptop() {
+        lapMgmt = new LaptopManagment();
+        laptopTbl = new DefaultTableModel();
+        ArrayList<LaptopInfo> laptops = lapMgmt.listAllLaptops();
+        String[] columns = {"laptop_id", "model no", "harddisk", "ram", "graphics", "generation", "processor", "price", "brand"};
+        laptopTbl.setColumnIdentifiers(columns);
+        for (LaptopInfo laptop : laptops) {
+            laptopTbl.addRow(new Object[]{laptop.getLaptop_id(), laptop.getModel_no(), laptop.getHarddisk(),
+                laptop.getRam(), laptop.getGraphics(), laptop.getGeneration(), laptop.getProcessor(),
+                laptop.getPrice(), laptop.getLapBrandInfo().getBrandname()});
+        }
+
+        tblLaptops.setModel(laptopTbl);
+    }
 
     private void fillComboLapModel() {
         try {
@@ -223,30 +269,78 @@ public class AddNewCustomer extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        CustomerInfo objCusInfo = new CustomerInfo();
+        String fname = txtFirstName.getText();
+        String lname = txtLastName.getText();
+        String contact = txtContactNo.getText();
+        String address = txtAddress.getText();
+        String Email = txtEmail.getText();
 
-        objCusInfo.setFirst_name(txtFirstName.getText());
-        objCusInfo.setMiddle_name(txtMiddleName.getText());
-        objCusInfo.setLast_name(txtLastName.getText());
-        objCusInfo.setContact_no(txtContactNo.getText());
-        objCusInfo.setAddress(txtAddress.getText());
-        objCusInfo.setEmail(txtEmail.getText());
+        if (!Validate.checkEmpty(fname)) {
+            if (!Validate.checkEmpty(lname)) {
+                if (!Validate.checkEmpty(contact)) {
+                    if (!Validate.checkEmpty(address)) {
+                        if (!Validate.checkEmpty(Email)) {
+                            if (!Validate.checkLength(fname)) {
+                                if (!Validate.checkLength(lname)) {
+                                    if (!Validate.checkContactLength(contact)) {
+                                        if (!Validate.checkAdressLength(address)) {
+                                            if (!Validate.checkEmailLength(Email)) {
+                                                CustomerInfo objCusInfo = new CustomerInfo();
 
-        SupCtrl supCtrl = new SupCtrl();
+                                                objCusInfo.setFirst_name(txtFirstName.getText());
+                                                objCusInfo.setMiddle_name(txtMiddleName.getText());
+                                                objCusInfo.setLast_name(txtLastName.getText());
+                                                objCusInfo.setContact_no(txtContactNo.getText());
+                                                objCusInfo.setAddress(txtAddress.getText());
+                                                objCusInfo.setEmail(txtEmail.getText());
 
-        String lapModel = (String) cmbLapModel.getSelectedItem();
-        LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
-        objCusInfo.setLapInfo(objLaptopInfo);
-        //objCusInfo.setUserInfo(loggedInUserInfo);
+                                                SupCtrl supCtrl = new SupCtrl();
 
-        //boolean isUserExist = objUserManage.AddNewUser(objUserInfo);
-        CustomerManagement objCusMgmt = new CustomerManagement();
-        boolean isCustomerNameExist = objCusMgmt.addNewCustomer(objCusInfo);
-        if (isCustomerNameExist) {
-            JOptionPane.showMessageDialog(null, "Customer created sucessfully!");
-            reset();
+                                                String lapModel = (String) cmbLapModel.getSelectedItem();
+                                                LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
+                                                objCusInfo.setLapInfo(objLaptopInfo);
+
+                                                CustomerManagement objCusMgmt = new CustomerManagement();
+                                                boolean isCustomerNameExist = objCusMgmt.addNewCustomer(objCusInfo);
+                                                if (isCustomerNameExist) {
+                                                    JOptionPane.showMessageDialog(null, "Customer created sucessfully!");
+                                                    reset();
+                                                    this.dispose();
+                                                    AddNewCustomerTransaction objAddNewCustomerTransaction = new AddNewCustomerTransaction(null, isCustomerNameExist, loggedInUserInfo);
+                                                    objAddNewCustomerTransaction.setVisible(isCustomerNameExist);
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Error to create Customer");
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "email length should be greater than 10");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "address length should be between 5-50");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "contact length should be 10 digit");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "last name should be between 3-15");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "first name should be between 3-15");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "email can not be empty");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "address can not be empty");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "contact can not be empty");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "last name can not be empty");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Error to create Customer");
+            JOptionPane.showMessageDialog(null, "first name can not be empty");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -268,6 +362,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -275,6 +370,8 @@ public class AddNewCustomer extends javax.swing.JDialog {
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox cmbLapModel;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblContactNo;
     private javax.swing.JLabel lblEmail;
@@ -282,6 +379,7 @@ public class AddNewCustomer extends javax.swing.JDialog {
     private javax.swing.JLabel lblFirstname;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblMiddleName;
+    private javax.swing.JTable tblLaptops;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtContactNo;
     private javax.swing.JTextField txtEmail;

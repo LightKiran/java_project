@@ -101,6 +101,11 @@ public class AddNewLaptop extends javax.swing.JDialog {
         btnCancel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancel1.setText("Cancel");
         btnCancel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancel1ActionPerformed(evt);
+            }
+        });
 
         cmbLaptopBrand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plz select" }));
         cmbLaptopBrand.addActionListener(new java.awt.event.ActionListener() {
@@ -134,18 +139,6 @@ public class AddNewLaptop extends javax.swing.JDialog {
                             .addComponent(txtGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHarddisk, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +147,17 @@ public class AddNewLaptop extends javax.swing.JDialog {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbLaptopBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbLaptopBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCancel1)
+                            .addComponent(txtProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(256, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,7 +172,7 @@ public class AddNewLaptop extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHarddisk1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtModel))
+                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblHarddisk, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,35 +210,73 @@ public class AddNewLaptop extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        LaptopInfo lapInfo = new LaptopInfo();
 
-        lapInfo.setModel_no(txtModel.getText());
-        lapInfo.setHarddisk(txtHarddisk.getText());
-        lapInfo.setRam(txtRAM.getText());
-        lapInfo.setGraphics(txtGraphics.getText());
-        lapInfo.setGeneration(txtGeneration.getText());
-        lapInfo.setProcessor(txtProcessor.getText());
-        lapInfo.setPrice(Double.parseDouble(txtPrice.getText()));
+        String model = txtModel.getText();
+        String harddisk = txtHarddisk.getText();
+        String ram = txtRAM.getText();
+        String graphics = txtGraphics.getText();
+        String gen = txtGeneration.getText();
+        String processor = txtProcessor.getText();
+        String price = txtPrice.getText();
 
-        String brand = (String) cmbLaptopBrand.getSelectedItem();
-        LaptopBrandManagement brandCtrl = new LaptopBrandManagement();
-        LaptopBrandInfo objLaptopBrandInfo = brandCtrl.searchLaptopBrandByName(brand);
-        lapInfo.setLapBrandInfo(objLaptopBrandInfo);
+        if (!Validate.checkEmpty(model)) {
+            if (!Validate.checkEmpty(harddisk)) {
+                if (!Validate.checkEmpty(ram)) {
+                    if (!Validate.checkEmpty(graphics)) {
+                        if (!Validate.checkEmpty(gen)) {
+                            if (!Validate.checkEmpty(processor)) {
+                                if (!Validate.checkEmpty(price)) {
+                                    if (!Validate.checkLengthModel(model)) {
+                                        LaptopInfo lapInfo = new LaptopInfo();
 
-        lapInfo.setUserInfo(loggedInUserInfo);
+                                        lapInfo.setModel_no(txtModel.getText());
+                                        lapInfo.setHarddisk(txtHarddisk.getText());
+                                        lapInfo.setRam(txtRAM.getText());
+                                        lapInfo.setGraphics(txtGraphics.getText());
+                                        lapInfo.setGeneration(txtGeneration.getText());
+                                        lapInfo.setProcessor(txtProcessor.getText());
+                                        lapInfo.setPrice(Double.parseDouble(txtPrice.getText()));
 
-//   lapInfo.setLapBrandInfo(null);
-        // lapInfo.setLaptopbrand((int) cmbLaptopBrand.getSelectedIndex());
-        //boolean isUserExist = objUserManage.AddNewUser(objUserInfo);
-        LaptopManagment lapMgmt = new LaptopManagment();
-        boolean isLaptopExist = lapMgmt.addNewLaptop(lapInfo);
-        if (isLaptopExist) {
-            JOptionPane.showMessageDialog(null, "New Laptop details added sucessfully!");
-            //reset();
+                                        String brand = (String) cmbLaptopBrand.getSelectedItem();
+                                        LaptopBrandManagement brandCtrl = new LaptopBrandManagement();
+                                        LaptopBrandInfo objLaptopBrandInfo = brandCtrl.searchLaptopBrandByName(brand);
+                                        lapInfo.setLapBrandInfo(objLaptopBrandInfo);
+
+                                        lapInfo.setUserInfo(loggedInUserInfo);
+
+                                        LaptopManagment lapMgmt = new LaptopManagment();
+                                        boolean isLaptopExist = lapMgmt.addNewLaptop(lapInfo);
+                                        if (isLaptopExist) {
+                                            JOptionPane.showMessageDialog(null, "New Laptop details added sucessfully!");
+                                            //reset();
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Error to create laptop details \n or laptop details already exist");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "model should be between 4-20");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "price can not be empty");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "processor can not be empty");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "generation not be empty");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "graphics can not be empty");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ram can not be empty");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "hardisk can not be empty");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Error to create laptop details");
+            JOptionPane.showMessageDialog(null, "model can not be empty");
         }
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void fillComboBrand() {
@@ -266,6 +307,11 @@ public class AddNewLaptop extends javax.swing.JDialog {
          System.out.println("" + cmbLaptopBrand.getSelectedItem());
          }*/
     }//GEN-LAST:event_cmbLaptopBrandActionPerformed
+
+    private void btnCancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancel1ActionPerformed
 
     /**
      * @param args the command line arguments

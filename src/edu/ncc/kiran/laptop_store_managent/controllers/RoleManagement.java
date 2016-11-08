@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class RoleManagement extends Database{
     
-    public RoleInfo searchRoleById(int id){
+    public RoleInfo searchRoleById(int id){ // to search role by role id
         RoleInfo role = null;
         try {
             String query = "SELECT * FROM tbl_role WHERE role_id = ?";
@@ -41,7 +41,7 @@ public class RoleManagement extends Database{
     }
     
     
-    public RoleInfo searchRoleByName(String name){
+    public RoleInfo searchRoleByName(String name){ // to search role by role type
         RoleInfo role = null;
         try {
             String query = "SELECT * FROM tbl_role WHERE role_type = ?";

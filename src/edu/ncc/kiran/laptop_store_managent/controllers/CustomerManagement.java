@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,7 @@ public class CustomerManagement extends Database {
 
     private int customerMaxID, lapModel;
 
-    public boolean addNewCustomer(CustomerInfo objCusInfo) {
+    public boolean addNewCustomer(CustomerInfo objCusInfo) { // to add new customer information
         boolean isCustomerNameExist = false;
         GetDbConnection();
         try {
@@ -44,9 +45,6 @@ public class CustomerManagement extends Database {
             this.pstat.setString(4, objCusInfo.getContact_no());
             this.pstat.setString(5, objCusInfo.getAddress());
             this.pstat.setString(6, objCusInfo.getEmail());
-//            pstat.setInt(7, objCusInfo.getUserInfo().getUser_id());
-
-            int checkExist = this.pstat.executeUpdate();
 
             ResultSet rs = conn.createStatement().executeQuery("select MAX(customer_id) from tbl_customer");
 
@@ -54,10 +52,15 @@ public class CustomerManagement extends Database {
                 customerMaxID = rs.getInt(1);
                 System.out.println("Recent input value of pk is  " + customerMaxID);
             }
-
+            try{
             lapModel = objCusInfo.getLapInfo().getLaptop_id();
             System.out.println("lap" + lapModel);
 
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "please select laptop model");
+                
+            }
+            int checkExist = this.pstat.executeUpdate();
             String sql3 = "insert into tbl_customer_laptop(customer_id, laptop_id) "
                     + "values(" + customerMaxID + "," + lapModel + ")";
 
@@ -68,16 +71,14 @@ public class CustomerManagement extends Database {
                 isCustomerNameExist = true;
             }
 
-            //CloseDbConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
-
+            System.out.println("Error"+ex);
         }
 
         return isCustomerNameExist;
     }
 
-    public ArrayList<CustomerInfo> listAllCustomers() {
+    public ArrayList<CustomerInfo> listAllCustomers() { // to list all customer information from table
         Database db = new Database();
         db.GetDbConnection();
         conn = Database.conn;
@@ -96,16 +97,10 @@ public class CustomerManagement extends Database {
                 CustomerInfo pg = new CustomerInfo();
                 pg.setCustomer_id(this.rs.getInt("customer_id"));
                 pg.setFirst_name(this.rs.getString("first_name"));
-//                pg.setMiddle_name(this.rs.getString("middle_name"));
-//                pg.setLast_name(this.rs.getString("last_name"));
-//                pg.setContact_no(this.rs.getString("contact_no"));
-//                pg.setAddress(this.rs.getString("address"));
-//                pg.setEmail(this.rs.getString("email
 
                 int lapId = this.rs.getInt("laptop_id");
                 LaptopInfo objlaptopInfo = supCtr.findLaptopInfoById(lapId);
                 pg.setLapInfo(objlaptopInfo);
-                //pg.setLapInfo(this.rs.getInt(""));
 
                 objCusInfo.add(pg);
             }
@@ -116,27 +111,27 @@ public class CustomerManagement extends Database {
         return objCusInfo;
     }
 
-    public ArrayList<CustomerInfo> listLatestCustomers() {
+    public ArrayList<CustomerInfo> listLatestCustomers() { // to list latest customer information from table
         Database db = new Database();
         db.GetDbConnection();
         conn = Database.conn;
-        //GetDbConnection();
+
         ArrayList<CustomerInfo> objCusInfo = new ArrayList<CustomerInfo>();
         try {
-            String query = "SELECT * FROM tbl_customer order by customer_id desc limit 2";
+            String query = "select tc.customer_id, tc.first_name, tcp.laptop_id "
+                    + "from tbl_customer tc inner join tbl_customer_laptop tcp "
+                    + "on tc.customer_id = tcp.customer_id order by customer_id desc limit 2";
+
             this.pstat = this.conn.prepareStatement(query);
-//            String query2 = "SELECT * FROM tbl_customer order by customer_id desc limit 1";
-//            this.pstat = this.conn.prepareStatement(query2);
+
             this.rs = this.pstat.executeQuery();
             while (rs.next()) {
                 CustomerInfo pg = new CustomerInfo();
                 pg.setCustomer_id(this.rs.getInt("customer_id"));
                 pg.setFirst_name(this.rs.getString("first_name"));
-                pg.setMiddle_name(this.rs.getString("middle_name"));
-                pg.setLast_name(this.rs.getString("last_name"));
-                pg.setContact_no(this.rs.getString("contact_no"));
-                pg.setAddress(this.rs.getString("address"));
-                pg.setEmail(this.rs.getString("email"));
+                int lapId = this.rs.getInt("laptop_id");
+                LaptopInfo objlaptopInfo = supCtr.findLaptopInfoById(lapId);
+                pg.setLapInfo(objlaptopInfo);
                 objCusInfo.add(pg);
             }
         } catch (SQLException ex) {
@@ -145,13 +140,15 @@ public class CustomerManagement extends Database {
         return objCusInfo;
     }
 
-    public boolean deleteCustomer(CustomerInfo customer) {
-        String sql = "delete from tbl_customer where customer_id=?";
-        boolean res = false;
+    public boolean deleteCustomer(CustomerInfo customer) { // to delete customer information
+ boolean res = false;
+       
+        String sql = "delete from tbl_customer where customer_id = ?";
         try {
             GetDbConnection();
             pstat = this.conn.prepareStatement(sql);
             pstat.setInt(1, customer.getCustomer_id());
+
             pstat.executeUpdate();
             pstat.close();
             CloseDbConnection();
@@ -163,43 +160,14 @@ public class CustomerManagement extends Database {
         return (res);
     }
 
-    public CustomerInfo searchCustomer(int custId) {
 
-        String sql = "select * from tbl_customer where customer_id=?";
-        //select name from emp where name like 'ravi%'
-        boolean res = false;
-        try {
-            GetDbConnection();
-            pstat = this.conn.prepareStatement(sql);
-            pstat.setInt(1, custId);
-            rs = pstat.executeQuery();//search
-            while (rs.next()) {
-                objCusInfo.setCustomer_id(this.rs.getInt("customer_id"));
-                objCusInfo.setFirst_name(this.rs.getString("first_name"));
-                objCusInfo.setMiddle_name(this.rs.getString("middle_name"));
-                objCusInfo.setLast_name(this.rs.getString("last_name"));
-                objCusInfo.setContact_no(this.rs.getString("contact_no"));
-                objCusInfo.setAddress(this.rs.getString("address"));
-                objCusInfo.setEmail(this.rs.getString("email"));
-            }
-            rs.close();
-            CloseDbConnection();
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-        return (objCusInfo);
-    }
-
-    public boolean Update(CustomerInfo custInfo) {
-//        String sql2 = "update tbl_customer set first_name=?, middle_name=?, last_name=?, "
-//                + "contact_no=?, address=?, email=? where customer_id=?";
+    public boolean Update(CustomerInfo custInfo) { // to update customer information
 
         String sql = "update tbl_customer tc inner join tbl_customer_laptop tcp "
                 + "on tc.customer_id = tcp.customer_id "
                 + "set tc.first_name=?, tc.middle_name=?, tc.last_name=?, "
                 + "tc.contact_no=?, tc.address=?, tc.email=?, tcp.laptop_id=? "
                 + "where tc.customer_id = ?";
-        /*xamp update tbl_customer tc inner join tbl_customer_laptop tcp on tc.customer_id and tcp.customer_id set tc.first_name='hari', tc.middle_name='hey', tc.last_name='rai', tc.contact_no=9841, tc.address='boudha', tc.email='harilla', tcp.laptop_id=2 where tc.customer_id = 4*/
         boolean res = false;
         try {
             GetDbConnection();
@@ -212,11 +180,6 @@ public class CustomerManagement extends Database {
             pstat.setString(6, custInfo.getEmail());
             pstat.setInt(7, custInfo.getLapInfo().getLaptop_id());
             pstat.setInt(8, custInfo.getCustomer_id());
-
-//            String brand = (String) cmbLapModel.getSelectedItem();
-//            SupCtrl supCtrl = new SupCtrl();
-//            LaptopInfo laptopInfo = supCtrl.findLaptopInfoByModel(brand);
-//            objCustomerInfo.setLapInfo(laptopInfo);
             pstat.executeUpdate();
             pstat.close();
             CloseDbConnection();

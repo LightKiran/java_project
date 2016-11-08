@@ -22,35 +22,28 @@ public class Database {
     private String user_name;
     private String password;
     private String driver;
-    //private String sql;
     public static Connection conn;
     protected PreparedStatement pstat = null;
     protected ResultSet rs = null;
 
-    public Database() {
+    public Database() { // initializing default constructor
         pc_name = "localhost";
         db_name = "cs_00158132_kiran_duwal_cp";
         user_name = "root";
         password = "";
         driver = "com.mysql.jdbc.Driver";
-//        sql = "";
-//        conn = null;
-//        pstat = null;
     }
 
     public Database(String pc_name, String db_name, String user_name,
-            String password, String driver) {
+            String password, String driver) { // initializing parameterized constructor
         this.pc_name = pc_name;
         this.db_name = db_name;
         this.user_name = user_name;
         this.password = password;
         this.driver = driver;
-//        this.sql = "";
-//        this.conn = null;
-//        this.pstat = null;
     }
 
-    public void GetDbConnection() {
+    public void GetDbConnection() { // to create database connection
         try {
             Class.forName(driver);
             
@@ -64,7 +57,7 @@ public class Database {
         }
     }
 
-    public void CloseDbConnection() {
+    public void CloseDbConnection() { // to close database connection
         try {
             this.conn.close();
             System.out.println("Database connection close");
@@ -72,7 +65,7 @@ public class Database {
             System.out.println("Error : " + ex.getMessage());
         }
     }
-/*
+
     public String getPc_name() {
         return pc_name;
     }
@@ -104,14 +97,14 @@ public class Database {
     public void setPassword(String password) {
         this.password = password;
     }
-    /*
+    
      public Connection getConn() {
      return conn;
      }
 
      public void setConn(Connection conn) {
      this.conn = conn;
-     }*/
+     }
 
 /*
     protected static Connection conn = null;

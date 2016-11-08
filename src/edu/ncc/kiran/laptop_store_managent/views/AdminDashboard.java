@@ -43,7 +43,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdd = new javax.swing.JMenu();
         jMenuItemUser = new javax.swing.JMenuItem();
@@ -51,10 +50,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenuItemLaptop = new javax.swing.JMenuItem();
         jMenuItemCustomer = new javax.swing.JMenuItem();
         jMenuItemCustomerTransaction = new javax.swing.JMenuItem();
-        jMenuCustomerTransaction = new javax.swing.JMenu();
-        jMenuItemCustomerTransViewUpdate = new javax.swing.JMenuItem();
-        jMenuCustomer = new javax.swing.JMenu();
+        jMenuItemSupplier = new javax.swing.JMenuItem();
+        jMenuItemOrder = new javax.swing.JMenuItem();
+        jMenuUpdateDeleteSearch = new javax.swing.JMenu();
         jMenuItemCustomerViewUpdate = new javax.swing.JMenuItem();
+        jMenuItemCustomerTransViewUpdate = new javax.swing.JMenuItem();
+        jMenuItemSupplierOrder = new javax.swing.JMenuItem();
+        jMenuItemSupplierTransaction = new javax.swing.JMenuItem();
+        jMenuItemUser2 = new javax.swing.JMenuItem();
+        jMenuItemSupplierView = new javax.swing.JMenuItem();
+        logoutMenu = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -68,20 +73,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Dashboard");
-
-        jLayeredPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 255, 102), 1, true));
-        jLayeredPane1.setForeground(new java.awt.Color(51, 0, 255));
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jMenuAdd.setText("Add");
 
@@ -125,21 +116,85 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jMenuAdd.add(jMenuItemCustomerTransaction);
 
+        jMenuItemSupplier.setText("Supplier");
+        jMenuItemSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSupplierActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemSupplier);
+
+        jMenuItemOrder.setText("Order");
+        jMenuItemOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOrderActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemOrder);
+
         jMenuBar1.add(jMenuAdd);
 
-        jMenuCustomerTransaction.setText("Customer Transaction");
+        jMenuUpdateDeleteSearch.setText("Update / Delete / View");
 
-        jMenuItemCustomerTransViewUpdate.setText("View / Update");
-        jMenuCustomerTransaction.add(jMenuItemCustomerTransViewUpdate);
+        jMenuItemCustomerViewUpdate.setText("Customer");
+        jMenuItemCustomerViewUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerViewUpdateActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemCustomerViewUpdate);
 
-        jMenuBar1.add(jMenuCustomerTransaction);
+        jMenuItemCustomerTransViewUpdate.setText("Customer Transaction");
+        jMenuItemCustomerTransViewUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerTransViewUpdateActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemCustomerTransViewUpdate);
 
-        jMenuCustomer.setText("Customer");
+        jMenuItemSupplierOrder.setText("Order");
+        jMenuItemSupplierOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSupplierOrderActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemSupplierOrder);
 
-        jMenuItemCustomerViewUpdate.setText("View / Update");
-        jMenuCustomer.add(jMenuItemCustomerViewUpdate);
+        jMenuItemSupplierTransaction.setText("Supplier Transaction");
+        jMenuItemSupplierTransaction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSupplierTransactionActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemSupplierTransaction);
 
-        jMenuBar1.add(jMenuCustomer);
+        jMenuItemUser2.setText("User");
+        jMenuItemUser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUser2ActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemUser2);
+
+        jMenuItemSupplierView.setText("Supplier");
+        jMenuItemSupplierView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSupplierViewActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteSearch.add(jMenuItemSupplierView);
+
+        jMenuBar1.add(jMenuUpdateDeleteSearch);
+
+        logoutMenu.setBackground(new java.awt.Color(255, 102, 102));
+        logoutMenu.setForeground(new java.awt.Color(255, 51, 51));
+        logoutMenu.setText("Log out");
+        logoutMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(logoutMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -147,26 +202,27 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(477, Short.MAX_VALUE))
+            .addGap(0, 631, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+            .addGap(0, 473, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserActionPerformed
-        // TODO add your handling code here:
-        AddNewUserPanel users = new AddNewUserPanel();
-        this.setContentPane(users);
+
+        final AddNewUser objaddAddNewUser = new AddNewUser(new javax.swing.JFrame(), true);
+        objaddAddNewUser.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objaddAddNewUser.dispose();
+            }
+        });
+        objaddAddNewUser.setLocationRelativeTo(this);
+        objaddAddNewUser.setVisible(true);
         this.validate();
     }//GEN-LAST:event_jMenuItemUserActionPerformed
 
@@ -212,17 +268,136 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.validate();
     }//GEN-LAST:event_jMenuItemCustomerActionPerformed
 
-    private void jMenuItemCustomerTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransactionActionPerformed
+    private void jMenuItemCustomerTransViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransViewUpdateActionPerformed
         // TODO add your handling code here:
-        final AddNewCustomerTransaction objaddAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
-        objaddAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+        final ViewAllCustomerTransaction objViewAllCustomerTransaction = new ViewAllCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objViewAllCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                objaddAddNewCustomerTransaction.dispose();
+                objViewAllCustomerTransaction.dispose();
             }
         });
-        objaddAddNewCustomerTransaction.setLocationRelativeTo(this);
-        objaddAddNewCustomerTransaction.setVisible(true);
+        objViewAllCustomerTransaction.setLocationRelativeTo(this);
+        objViewAllCustomerTransaction.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerTransViewUpdateActionPerformed
+
+    private void jMenuItemCustomerViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerViewUpdateActionPerformed
+        // TODO add your handling code here:
+        final ViewAllCustomer objViewAllCustomer = new ViewAllCustomer(new javax.swing.JFrame(), true);
+        objViewAllCustomer.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllCustomer.dispose();
+            }
+        });
+        objViewAllCustomer.setLocationRelativeTo(this);
+        objViewAllCustomer.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerViewUpdateActionPerformed
+
+    private void jMenuItemSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSupplierActionPerformed
+        // TODO add your handling code here:
+        final AddNewSupplier objAddNewSupplier = new AddNewSupplier(new javax.swing.JFrame(), true);
+        objAddNewSupplier.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objAddNewSupplier.dispose();
+            }
+        });
+        objAddNewSupplier.setLocationRelativeTo(this);
+        objAddNewSupplier.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemSupplierActionPerformed
+
+    private void jMenuItemOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOrderActionPerformed
+        // TODO add your handling code here:
+        final AddNewOrder objAddNewOrder = new AddNewOrder(new javax.swing.JFrame(), true);
+        objAddNewOrder.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objAddNewOrder.dispose();
+            }
+        });
+        objAddNewOrder.setLocationRelativeTo(this);
+        objAddNewOrder.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemOrderActionPerformed
+
+    private void jMenuItemSupplierOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSupplierOrderActionPerformed
+        // TODO add your handling code here:
+        final ViewAllOrder objViewAllOrder = new ViewAllOrder(new javax.swing.JFrame(), true);
+        objViewAllOrder.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllOrder.dispose();
+            }
+        });
+        objViewAllOrder.setLocationRelativeTo(this);
+        objViewAllOrder.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemSupplierOrderActionPerformed
+
+    private void jMenuItemSupplierTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSupplierTransactionActionPerformed
+        // TODO add your handling code here:
+        final ViewAllSupplierTransaction objViewAllSupplierTransaction = new ViewAllSupplierTransaction(new javax.swing.JFrame(), true);
+        objViewAllSupplierTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllSupplierTransaction.dispose();
+            }
+        });
+        objViewAllSupplierTransaction.setLocationRelativeTo(this);
+        objViewAllSupplierTransaction.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemSupplierTransactionActionPerformed
+
+    private void jMenuItemUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUser2ActionPerformed
+        // TODO add your handling code here:
+        final ViewAllUser objViewAllUser = new ViewAllUser(new javax.swing.JFrame(), true);
+        objViewAllUser.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllUser.dispose();
+            }
+        });
+        objViewAllUser.setLocationRelativeTo(this);
+        objViewAllUser.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemUser2ActionPerformed
+
+    private void jMenuItemSupplierViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSupplierViewActionPerformed
+        // TODO add your handling code here:
+        final ViewAllSupplier objViewAllSupplier = new ViewAllSupplier(new javax.swing.JFrame(), true);
+        objViewAllSupplier.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllSupplier.dispose();
+            }
+        });
+        objViewAllSupplier.setLocationRelativeTo(this);
+        objViewAllSupplier.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemSupplierViewActionPerformed
+
+    private void logoutMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMenuMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        UserLoginFrom ul = new UserLoginFrom();
+        ul.setVisible(true);
+    }//GEN-LAST:event_logoutMenuMouseClicked
+
+    private void jMenuItemCustomerTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransactionActionPerformed
+        // TODO add your handling code here:
+        final AddNewCustomerTransaction objAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objAddNewCustomerTransaction.dispose();
+            }
+        });
+        objAddNewCustomerTransaction.setLocationRelativeTo(this);
+        objAddNewCustomerTransaction.setVisible(true);
         this.validate();
     }//GEN-LAST:event_jMenuItemCustomerTransactionActionPerformed
 
@@ -262,7 +437,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -270,15 +444,21 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuCustomer;
-    private javax.swing.JMenu jMenuCustomerTransaction;
     private javax.swing.JMenuItem jMenuItemCustomer;
     private javax.swing.JMenuItem jMenuItemCustomerTransViewUpdate;
     private javax.swing.JMenuItem jMenuItemCustomerTransaction;
     private javax.swing.JMenuItem jMenuItemCustomerViewUpdate;
     private javax.swing.JMenuItem jMenuItemLaptop;
     private javax.swing.JMenuItem jMenuItemLaptopBrand;
+    private javax.swing.JMenuItem jMenuItemOrder;
+    private javax.swing.JMenuItem jMenuItemSupplier;
+    private javax.swing.JMenuItem jMenuItemSupplierOrder;
+    private javax.swing.JMenuItem jMenuItemSupplierTransaction;
+    private javax.swing.JMenuItem jMenuItemSupplierView;
     private javax.swing.JMenuItem jMenuItemUser;
+    private javax.swing.JMenuItem jMenuItemUser2;
+    private javax.swing.JMenu jMenuUpdateDeleteSearch;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JMenu logoutMenu;
     // End of variables declaration//GEN-END:variables
 }

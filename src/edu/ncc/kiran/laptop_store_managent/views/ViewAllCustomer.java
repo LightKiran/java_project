@@ -9,7 +9,6 @@ import edu.ncc.kiran.laptop_store_managent.controllers.CustomerManagement;
 import edu.ncc.kiran.laptop_store_managent.controllers.Database;
 import edu.ncc.kiran.laptop_store_managent.controllers.SupCtrl;
 import edu.ncc.kiran.laptop_store_managent.models.CustomerInfo;
-import edu.ncc.kiran.laptop_store_managent.models.LaptopBrandInfo;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +16,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -29,10 +29,10 @@ public class ViewAllCustomer extends javax.swing.JDialog {
      */
     CustomerManagement cusMgmt;
     DefaultTableModel customerTbl;
-    private PreparedStatement pstat = null;
-    private ResultSet rs = null;
-    private Connection conn = null;
-  //  private SupCtrl supCtr;
+    private PreparedStatement pstat;
+    private ResultSet rs;
+    private Connection conn;
+    //  private SupCtrl supCtr;
     Database db = new Database();
 
     public ViewAllCustomer(java.awt.Frame parent, boolean modal) {
@@ -40,7 +40,7 @@ public class ViewAllCustomer extends javax.swing.JDialog {
         initComponents();
         db.GetDbConnection();
         conn = db.conn;
-    //    supCtr = new SupCtrl();
+        //    supCtr = new SupCtrl();
         showAllCustomer();
         fillComboLapModel();
     }
@@ -76,6 +76,8 @@ public class ViewAllCustomer extends javax.swing.JDialog {
         txtCustomerId = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        lblFirstname1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,7 +128,9 @@ public class ViewAllCustomer extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel7.setText("Add New Customer");
+        jLabel7.setText("Please, Select Customer To Update,Delete and View");
+
+        txtCustomerId.setEditable(false);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +139,15 @@ public class ViewAllCustomer extends javax.swing.JDialog {
             }
         });
 
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        lblFirstname1.setText("Customer id :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,100 +155,100 @@ public class ViewAllCustomer extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtLastName)
-                            .addComponent(txtContactNo)
-                            .addComponent(txtAddress)
-                            .addComponent(txtEmail)
-                            .addComponent(cmbLapModel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMiddleName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(txtCustomerId, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addComponent(btnShowAllCustomer)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLatestCustomer))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUpdate))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUpdate)
+                                    .addComponent(lblFirstname1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(71, 71, 71)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtLastName)
+                                        .addComponent(txtContactNo)
+                                        .addComponent(txtAddress)
+                                        .addComponent(txtEmail)
+                                        .addComponent(cmbLapModel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtFirstName, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtMiddleName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCustomerId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnDelete))))
+                        .addGap(493, 493, 493)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnShowAllCustomer)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLatestCustomer)))
-                .addGap(1, 1, 1)
-                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(25, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(65, 65, 65)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnShowAllCustomer)
                             .addComponent(btnLatestCustomer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmbLapModel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnUpdate))
-                    .addComponent(lblEmail1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(416, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFirstname1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2))
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbLapModel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnDelete))
+                        .addContainerGap())))
         );
 
         pack();
@@ -246,7 +259,23 @@ public class ViewAllCustomer extends javax.swing.JDialog {
         customerTbl = new DefaultTableModel();
         ArrayList<CustomerInfo> users = cusMgmt.listAllCustomers();
         String[] columns = {"customer_id", "first_name", /*"middle_name",
-             "last_name", "contact_no", "address", "email"*/ "laptop_id"};
+             "last_name", "contact_no", "address", "email"*/ "laptop_model"};
+        customerTbl.setColumnIdentifiers(columns);
+        for (CustomerInfo user : users) {
+            customerTbl.addRow(new Object[]{user.getCustomer_id(), user.getFirst_name(), /*user.getMiddle_name(),
+                 user.getLast_name(), user.getContact_no(), user.getAddress(), user.getEmail()*/
+                user.getLapInfo().getModel_no()});
+        }
+
+        customerTable.setModel(customerTbl);
+    }
+
+    public final void showLatestCustomer() {
+        cusMgmt = new CustomerManagement();
+        customerTbl = new DefaultTableModel();
+        ArrayList<CustomerInfo> users = cusMgmt.listLatestCustomers();
+        String[] columns = {"customer_id", "first_name", /*"middle_name",
+             "last_name", "contact_no", "address", "email"*/ "laptop_model"};
         customerTbl.setColumnIdentifiers(columns);
         for (CustomerInfo user : users) {
             customerTbl.addRow(new Object[]{user.getCustomer_id(), user.getFirst_name(), /*user.getMiddle_name(),
@@ -278,7 +307,6 @@ public class ViewAllCustomer extends javax.swing.JDialog {
         try {
             int row = customerTable.getSelectedRow();
             String rowClick = (customerTable.getModel().getValueAt(row, 0).toString());
-            //  String sql = "select * from tbl_customer where customer_id='" + rowClick + "'";
             String sql = "select tc.customer_id, tc.first_name, tc.middle_name, tc.last_name, tc.contact_no, tc.address, tc.email, tcp.laptop_id "
                     + "from tbl_customer tc inner join tbl_customer_laptop tcp "
                     + "on tc.customer_id = tcp.customer_id "
@@ -316,10 +344,84 @@ public class ViewAllCustomer extends javax.swing.JDialog {
 
     private void btnLatestCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLatestCustomerActionPerformed
         // TODO add your handling code here:
-        // showNewCustomer();
+        showLatestCustomer();
     }//GEN-LAST:event_btnLatestCustomerActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        String fname = txtFirstName.getText();
+        String lname = txtLastName.getText();
+        String contact = txtContactNo.getText();
+        String address = txtAddress.getText();
+        String Email = txtEmail.getText();
+
+        if (!Validate.checkEmpty(fname)) {
+            if (!Validate.checkEmpty(lname)) {
+                if (!Validate.checkEmpty(contact)) {
+                    if (!Validate.checkEmpty(address)) {
+                        if (!Validate.checkEmpty(Email)) {
+                            if (!Validate.checkLength(fname)) {
+                                if (!Validate.checkLength(lname)) {
+                                    if (!Validate.checkContactLength(contact)) {
+                                        if (!Validate.checkAdressLength(address)) {
+                                            if (!Validate.checkEmailLength(Email)) {
+                                                CustomerInfo objCustomerInfo = new CustomerInfo();
+                                                CustomerManagement objCustomerManage = new CustomerManagement();
+
+                                                objCustomerInfo.setCustomer_id(Integer.parseInt(this.txtCustomerId.getText()));
+                                                objCustomerInfo.setFirst_name(this.txtFirstName.getText());
+                                                objCustomerInfo.setMiddle_name(this.txtMiddleName.getText());
+                                                objCustomerInfo.setLast_name(this.txtLastName.getText());
+                                                objCustomerInfo.setContact_no(this.txtContactNo.getText());
+                                                objCustomerInfo.setAddress(this.txtAddress.getText());
+                                                objCustomerInfo.setEmail(this.txtEmail.getText());
+
+                                                String brand = (String) cmbLapModel.getSelectedItem();
+                                                SupCtrl supCtrl = new SupCtrl();
+                                                LaptopInfo laptopInfo = supCtrl.findLaptopInfoByModel(brand);
+                                                objCustomerInfo.setLapInfo(laptopInfo);
+
+                                                if (objCustomerManage.Update(objCustomerInfo) == true) {
+
+                                                    JOptionPane.showMessageDialog(null, "Record Update Sucessfully");
+                                                    showAllCustomer();
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Error to Update Record");
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "email length should be greater than 10");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "address length should be between 5-50");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "contact length should be 10 digit");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "last name should be between 3-15");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "first name should be between 3-15");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "email can not be empty");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "address can not be empty");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "contact can not be empty");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "last name can not be empty");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "first name can not be empty");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         CustomerInfo objCustomerInfo = new CustomerInfo();
         CustomerManagement objCustomerManage = new CustomerManagement();
@@ -337,57 +439,32 @@ public class ViewAllCustomer extends javax.swing.JDialog {
         LaptopInfo laptopInfo = supCtrl.findLaptopInfoByModel(brand);
         objCustomerInfo.setLapInfo(laptopInfo);
 
-        if (objCustomerManage.Update(objCustomerInfo) == true) {
-            this.lblMessage.setText("Record Update Sucessfully");
-            showAllCustomer();
+        if (objCustomerManage.deleteCustomer(objCustomerInfo) == true) {
+            JOptionPane.showMessageDialog(null, "Delete Record Successfully");
+            reset();
         } else {
-            this.lblMessage.setText("Error to Update Record");
+            JOptionPane.showMessageDialog(null, "Error to Delete Record");
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+        showAllCustomer();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void reset() {
+        txtCustomerId.setText("");
+        txtFirstName.setText("");
+        txtMiddleName.setText("");
+        txtLastName.setText("");
+        txtContactNo.setText("");
+        txtAddress.setText("");
+        txtEmail.setText("");
+        lblMessage.setText("");
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewAllCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewAllCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewAllCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewAllCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ViewAllCustomer dialog = new ViewAllCustomer(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLatestCustomer;
     private javax.swing.JButton btnShowAllCustomer;
     private javax.swing.JButton btnUpdate;
@@ -400,6 +477,7 @@ public class ViewAllCustomer extends javax.swing.JDialog {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEmail1;
     private javax.swing.JLabel lblFirstname;
+    private javax.swing.JLabel lblFirstname1;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblMiddleName;

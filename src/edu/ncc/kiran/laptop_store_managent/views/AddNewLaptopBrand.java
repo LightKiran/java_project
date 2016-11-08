@@ -8,6 +8,7 @@ package edu.ncc.kiran.laptop_store_managent.views;
 import edu.ncc.kiran.laptop_store_managent.controllers.LaptopBrandManagement;
 import edu.ncc.kiran.laptop_store_managent.controllers.LaptopManagment;
 import edu.ncc.kiran.laptop_store_managent.models.LaptopBrandInfo;
+import edu.ncc.kiran.laptop_store_managent.models.OrderInfo;
 import edu.ncc.kiran.laptop_store_managent.models.UserInfo;
 import javax.swing.JOptionPane;
 
@@ -21,7 +22,7 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
      * Creates new form AddNewLaptopBrand
      */
     UserInfo loggedInUserInfo;
-    
+
     public AddNewLaptopBrand(java.awt.Frame parent, boolean modal, UserInfo loggedInUserInfo) {
         super(parent, modal);
         initComponents();
@@ -40,6 +41,7 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtLapBrand = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+        btnCancel1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,6 +54,16 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
             }
         });
 
+        btnCancel1.setBackground(new java.awt.Color(255, 0, 0));
+        btnCancel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCancel1.setText("Cancel");
+        btnCancel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancel1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,11 +71,12 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtLapBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
                     .addComponent(btnSave))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancel1)
+                    .addComponent(txtLapBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -74,7 +87,9 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(txtLapBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSave)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnCancel1))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -83,28 +98,44 @@ public class AddNewLaptopBrand extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        LaptopBrandInfo objLaptopBrandInfo = new LaptopBrandInfo();
-        
-        objLaptopBrandInfo.setBrandname(txtLapBrand.getText());
-        //objLaptopBrandInfo.setUserInfo(loggedInUserInfo);
-        
-        LaptopBrandManagement objLaptopBrandManagment = new LaptopBrandManagement();
-        
-        boolean isLaptopBrandExist = objLaptopBrandManagment.CreateNewLaptopBrand(objLaptopBrandInfo);
-        
-        if(isLaptopBrandExist){
-           JOptionPane.showMessageDialog(null, "New laptop brand added sucessfully"); 
-        }else{
-            JOptionPane.showMessageDialog(null, "Error!! New laptop brand added"); 
+        String brand = txtLapBrand.getText();
+
+        if (!Validate.checkEmpty(brand)) {
+            if (!Validate.checkLengthModel(brand)) {
+                LaptopBrandInfo objLaptopBrandInfo = new LaptopBrandInfo();
+
+                objLaptopBrandInfo.setBrandname(txtLapBrand.getText());
+
+                LaptopBrandManagement objLaptopBrandManagment = new LaptopBrandManagement();
+
+                boolean isLaptopBrandExist = objLaptopBrandManagment.CreateNewLaptopBrand(objLaptopBrandInfo);
+
+                if (isLaptopBrandExist) {
+                    JOptionPane.showMessageDialog(null, "New laptop brand added sucessfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error!! New laptop brand added");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "brand lenght should between 2-15");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "brand can be empty");
         }
+
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancel1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancel1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel1;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField txtLapBrand;

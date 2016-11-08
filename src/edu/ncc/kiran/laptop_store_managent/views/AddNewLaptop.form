@@ -41,22 +41,6 @@
                           <Component id="txtRAM" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnSave" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCancel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblProcessor" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                          <Component id="lblPrice" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtProcessor" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                          <Component id="txtPrice" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Component id="lblTitle" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -67,6 +51,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtModel" min="-2" pref="106" max="-2" attributes="0"/>
                           <Component id="cmbLaptopBrand" min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProcessor" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="lblPrice" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnCancel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtProcessor" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Component id="txtPrice" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -87,7 +84,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblHarddisk1" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="txtModel" max="32767" attributes="0"/>
+                  <Component id="txtModel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -212,6 +209,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancel1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHarddisk">
     </Component>

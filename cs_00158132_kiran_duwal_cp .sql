@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2016 at 03:58 AM
+-- Generation Time: Oct 23, 2016 at 11:03 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -34,15 +34,19 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `contact_no` varchar(17) DEFAULT NULL,
   `address` varchar(250) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_customer`
 --
 
 INSERT INTO `tbl_customer` (`customer_id`, `first_name`, `middle_name`, `last_name`, `contact_no`, `address`, `email`) VALUES
-(1, '', '', '', '', 'fad', 'af'),
-(2, 'daf', '', 'adf', 'adf', 'afd', 'dfa');
+(1, 'krishna', 'gopal', 'duwal', '984131522', 'mahankal', 'krishna@outlook.com'),
+(2, 'shyam', '', 'tamang', '98415241700', 'new road', 'shyam@gmail.com'),
+(3, 'gita', '', 'rai', '98415326400', 'jorpati', 'gita@yahoo.com'),
+(4, 'karan', '', 'duwal', '98136059666', 'bhaktapur', 'karan@gmail.com'),
+(5, 'sabin', '', 'shrestha', '9841523256', 'jorpati', 'sabin789@yahoo.com'),
+(6, 'ajaya', '', 'tamang', '9841315226', 'maitidevi', 'ajaya@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -51,9 +55,20 @@ INSERT INTO `tbl_customer` (`customer_id`, `first_name`, `middle_name`, `last_na
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_customer_laptop` (
-  `tbl_customer_customer_id` int(10) NOT NULL,
-  `tbl_laptop_laptop_id` int(10) NOT NULL
+  `customer_id` int(10) NOT NULL,
+  `laptop_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_customer_laptop`
+--
+
+INSERT INTO `tbl_customer_laptop` (`customer_id`, `laptop_id`) VALUES
+(1, 2),
+(3, 2),
+(4, 2),
+(2, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -69,28 +84,16 @@ CREATE TABLE IF NOT EXISTS `tbl_customer_transaction` (
   `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `customer_id` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_customer_transaction`
 --
 
 INSERT INTO `tbl_customer_transaction` (`customer_transaction_id`, `paid`, `due`, `total_cost`, `date`, `time`, `customer_id`) VALUES
-(1, '', '', '', '2016-10-04', '13:16:38', 2),
-(2, '', '', '', '2016-10-04', '13:29:55', 2),
-(3, '64', '46', '354', '2016-10-04', '13:30:54', 2),
-(4, '', '', '', '2016-10-04', '13:35:30', 1),
-(5, '', '', '', '2016-10-04', '13:39:08', 1),
-(6, '', '65', '56', '2016-10-04', '13:41:42', 1),
-(7, '', '65', '56', '2016-10-04', '13:41:49', 2),
-(8, '', '', '', '2016-10-04', '13:46:24', 2),
-(9, '', '', '', '2016-10-04', '13:53:09', 2),
-(10, '', '', '', '2016-10-04', '13:59:55', 2),
-(11, '', '', '', '2016-10-04', '14:03:35', 1),
-(12, '', '', '', '2016-10-04', '14:03:44', 2),
-(13, '', '', '', '2016-10-04', '14:05:16', 2),
-(14, '', '', '', '2016-10-04', '14:06:22', 1),
-(15, '', '', '', '2016-10-04', '14:06:53', 2);
+(1, '50000', '0', '50000', '2016-09-28', '01:34:55', 1),
+(2, '70000', '10000', '60000', '2016-09-30', '01:35:22', 2),
+(4, '70000', '', '70000', '2016-10-11', '14:19:49', 6);
 
 -- --------------------------------------------------------
 
@@ -108,15 +111,16 @@ CREATE TABLE IF NOT EXISTS `tbl_laptop` (
   `processor` varchar(45) DEFAULT NULL,
   `price` varchar(45) DEFAULT NULL,
   `laptopbrand_id` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_laptop`
 --
 
 INSERT INTO `tbl_laptop` (`laptop_id`, `model_no`, `harddisk`, `ram`, `graphics`, `generation`, `processor`, `price`, `laptopbrand_id`) VALUES
-(1, '', '', '', 'afds', '', '', '43.0', 1),
-(2, 'dsf', 'dfs', 'dfs', 'afds', '', '', '43.0', 1);
+(1, '5537', '500 GB', '4 GB', '2 GB', '4 th', 'i7', '45000.0', 1),
+(2, '3542', '1 TB', '4 GB', '2 GB', '5 th', 'i5', '60000.0', 2),
+(3, '5576', '1 TB', '8 GB', '4 GB', '5 th', 'i7', '80000.0', 3);
 
 -- --------------------------------------------------------
 
@@ -127,14 +131,18 @@ INSERT INTO `tbl_laptop` (`laptop_id`, `model_no`, `harddisk`, `ram`, `graphics`
 CREATE TABLE IF NOT EXISTS `tbl_laptopbrand` (
 `laptopbrand_id` int(3) NOT NULL,
   `brandname` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_laptopbrand`
 --
 
 INSERT INTO `tbl_laptopbrand` (`laptopbrand_id`, `brandname`) VALUES
-(1, 'dell');
+(1, 'dell'),
+(2, 'hp'),
+(3, 'alienware'),
+(4, 'mac'),
+(5, 'tosiba');
 
 -- --------------------------------------------------------
 
@@ -148,7 +156,16 @@ CREATE TABLE IF NOT EXISTS `tbl_order` (
   `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `laptop_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`order_id`, `peices`, `date`, `time`, `laptop_id`) VALUES
+(1, '20', '2016-10-23', '12:23:53', 1),
+(2, '10', '2016-10-23', '12:25:16', 3),
+(3, '5', '2016-10-23', '12:25:57', 2);
 
 -- --------------------------------------------------------
 
@@ -160,6 +177,15 @@ CREATE TABLE IF NOT EXISTS `tbl_order_supplier` (
   `order_id` int(10) NOT NULL,
   `supplier_id` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_order_supplier`
+--
+
+INSERT INTO `tbl_order_supplier` (`order_id`, `supplier_id`) VALUES
+(1, 2),
+(2, 3),
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -175,7 +201,16 @@ CREATE TABLE IF NOT EXISTS `tbl_order_transaction` (
   `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `order_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_order_transaction`
+--
+
+INSERT INTO `tbl_order_transaction` (`supplier_transaction_id`, `paid`, `due`, `total_cost`, `date`, `time`, `order_id`) VALUES
+(1, '1500000', '100000', '1600000', '2016-10-23', '12:24:44', 1),
+(2, '1200000', '', '1200000', '2016-10-23', '12:25:38', 2),
+(3, '600000', '', '600000', '2016-10-23', '12:26:15', 3);
 
 -- --------------------------------------------------------
 
@@ -210,7 +245,17 @@ CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `contact_no` varchar(10) DEFAULT NULL,
   `address` varchar(150) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_supplier`
+--
+
+INSERT INTO `tbl_supplier` (`supplier_id`, `first_name`, `middle_name`, `last_name`, `contact_no`, `address`, `email`) VALUES
+(1, 'ram', 'bahadur', 'shrestha', '9841522756', 'jamal', 'ram@yahoo.com'),
+(2, 'shyam', '', 'rai', '9841522648', 'bhaktapur', 'shyam34@hotmail.com'),
+(3, 'hari', '', 'tamang', '9803700945', 'new road', 'hari47@outlook.com'),
+(4, 'jack', '', 'maharjan', '9808122566', 'new road', 'jack478@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -229,17 +274,15 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `login_name` varchar(45) DEFAULT NULL,
   `login_password` varchar(45) DEFAULT NULL,
   `role_id` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`user_id`, `first_name`, `middle_name`, `last_name`, `contact_no`, `address`, `email`, `login_name`, `login_password`, `role_id`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, 'a', 'a', 1),
-(2, NULL, NULL, NULL, NULL, NULL, NULL, 's', 's', 2),
-(3, '', '', '', '', '', '', '', '', 1),
-(4, '', '', '', '', '', '', 'ss', 'ss', 2);
+(1, 'kiran', '', 'duwal', '9841315222', 'boudha', 'kiran@gmail.com', 'admin', 'admin', 1),
+(2, 'hari', 'bhadur', 'rai', '9803700978', 'maitidev', 'hari@hotmail.com', 'staff', 'staff', 2);
 
 -- --------------------------------------------------------
 
@@ -249,17 +292,9 @@ INSERT INTO `tbl_user` (`user_id`, `first_name`, `middle_name`, `last_name`, `co
 
 CREATE TABLE IF NOT EXISTS `tbl_user_customer_transaction` (
   `user_id` int(3) NOT NULL DEFAULT '0',
-  `customer_transaction_id` int(10) NOT NULL
+  `customer_transaction_id` int(10) NOT NULL,
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_user_customer_transaction`
---
-
-INSERT INTO `tbl_user_customer_transaction` (`user_id`, `customer_transaction_id`) VALUES
-(3, 10),
-(3, 14),
-(1, 15);
 
 --
 -- Indexes for dumped tables
@@ -275,7 +310,7 @@ ALTER TABLE `tbl_customer`
 -- Indexes for table `tbl_customer_laptop`
 --
 ALTER TABLE `tbl_customer_laptop`
- ADD PRIMARY KEY (`tbl_customer_customer_id`,`tbl_laptop_laptop_id`), ADD KEY `fk_tbl_customer_has_tbl_laptop_tbl_laptop1` (`tbl_laptop_laptop_id`), ADD KEY `fk_tbl_customer_has_tbl_laptop_tbl_customer1` (`tbl_customer_customer_id`);
+ ADD PRIMARY KEY (`customer_id`,`laptop_id`), ADD KEY `laptop_id` (`laptop_id`), ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `tbl_customer_transaction`
@@ -335,7 +370,7 @@ ALTER TABLE `tbl_user`
 -- Indexes for table `tbl_user_customer_transaction`
 --
 ALTER TABLE `tbl_user_customer_transaction`
- ADD PRIMARY KEY (`user_id`,`customer_transaction_id`), ADD KEY `fk_tbl_user_has_tbl_customer_transaction_tbl_customer_transac1` (`customer_transaction_id`), ADD KEY `fk_tbl_user_has_tbl_customer_transaction_tbl_user1` (`user_id`);
+ ADD PRIMARY KEY (`user_id`,`customer_transaction_id`), ADD KEY `fk_tbl_user_has_tbl_customer_transaction_tbl_customer_transac1` (`customer_transaction_id`), ADD KEY `fk_tbl_user_has_tbl_customer_transaction_tbl_user1` (`user_id`), ADD KEY `customer_id` (`customer_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -345,42 +380,42 @@ ALTER TABLE `tbl_user_customer_transaction`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_customer_transaction`
 --
 ALTER TABLE `tbl_customer_transaction`
-MODIFY `customer_transaction_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `customer_transaction_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_laptop`
 --
 ALTER TABLE `tbl_laptop`
-MODIFY `laptop_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `laptop_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_laptopbrand`
 --
 ALTER TABLE `tbl_laptopbrand`
-MODIFY `laptopbrand_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `laptopbrand_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT;
+MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_order_transaction`
 --
 ALTER TABLE `tbl_order_transaction`
-MODIFY `supplier_transaction_id` int(5) NOT NULL AUTO_INCREMENT;
+MODIFY `supplier_transaction_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-MODIFY `supplier_id` int(2) NOT NULL AUTO_INCREMENT;
+MODIFY `supplier_id` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -389,14 +424,14 @@ MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- Constraints for table `tbl_customer_laptop`
 --
 ALTER TABLE `tbl_customer_laptop`
-ADD CONSTRAINT `fk_tbl_customer_has_tbl_laptop_tbl_customer1` FOREIGN KEY (`tbl_customer_customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_customer_has_tbl_laptop_tbl_laptop1` FOREIGN KEY (`tbl_laptop_laptop_id`) REFERENCES `tbl_laptop` (`laptop_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `tbl_customer_laptop_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `tbl_customer_laptop_ibfk_2` FOREIGN KEY (`laptop_id`) REFERENCES `tbl_laptop` (`laptop_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_customer_transaction`
 --
 ALTER TABLE `tbl_customer_transaction`
-ADD CONSTRAINT `fk_tbl_customer_transaction_tbl_customer1` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_tbl_customer_transaction_tbl_customer1` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_laptop`
@@ -408,20 +443,20 @@ ADD CONSTRAINT `fk_tbl_laptop_tbl_laptopbrand1` FOREIGN KEY (`laptopbrand_id`) R
 -- Constraints for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-ADD CONSTRAINT `fk_tbl_order_tbl_laptop1` FOREIGN KEY (`laptop_id`) REFERENCES `tbl_laptop` (`laptop_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_tbl_order_tbl_laptop1` FOREIGN KEY (`laptop_id`) REFERENCES `tbl_laptop` (`laptop_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_order_supplier`
 --
 ALTER TABLE `tbl_order_supplier`
-ADD CONSTRAINT `fk_tbl_order_has_tbl_supplier_tbl_order1` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_order_has_tbl_supplier_tbl_supplier1` FOREIGN KEY (`supplier_id`) REFERENCES `tbl_supplier` (`supplier_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_tbl_order_has_tbl_supplier_tbl_order1` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_tbl_order_has_tbl_supplier_tbl_supplier1` FOREIGN KEY (`supplier_id`) REFERENCES `tbl_supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_order_transaction`
 --
 ALTER TABLE `tbl_order_transaction`
-ADD CONSTRAINT `fk_tbl_supplier_transaction_tbl_order1` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_tbl_supplier_transaction_tbl_order1` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_user`
@@ -433,8 +468,9 @@ ADD CONSTRAINT `fk_tbl_user_tbl_role1` FOREIGN KEY (`role_id`) REFERENCES `tbl_r
 -- Constraints for table `tbl_user_customer_transaction`
 --
 ALTER TABLE `tbl_user_customer_transaction`
-ADD CONSTRAINT `fk_tbl_user_has_tbl_customer_transaction_tbl_customer_transac1` FOREIGN KEY (`customer_transaction_id`) REFERENCES `tbl_customer_transaction` (`customer_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_user_has_tbl_customer_transaction_tbl_user1` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `tbl_user_customer_transaction_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `tbl_user_customer_transaction_ibfk_2` FOREIGN KEY (`customer_transaction_id`) REFERENCES `tbl_customer_transaction` (`customer_transaction_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `tbl_user_customer_transaction_ibfk_3` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

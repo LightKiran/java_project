@@ -1,0 +1,71 @@
+[33mcommit 89b51a11d57d8ed93e73c5a245038fe168bb3cad[m
+Author: kiran <kiran@Kiran>
+Date:   Wed Oct 12 21:32:00 2016 +0545
+
+    add new order, supplier, supplier transaction
+
+[33mcommit e635e657c780f7fcb7557f448dbc207131cdaa35[m
+Author: kiran <kiran@Kiran>
+Date:   Sat Oct 8 13:27:45 2016 +0545
+
+    multiple table updated sucessfully of tbl_customer_laptop and tbl_customer
+
+[33mcommit 32bdbeb8f07a64f444bdf1acc08ba59443cce539[m
+Author: kiran <kiran@Kiran>
+Date:   Tue Oct 4 14:31:47 2016 +0545
+
+    store customer transaction details in multiple table and retrive completed
+
+[33mcommit 4132a3bcd2bab27a81c52861eff0908d60d1eff5[m
+Author: kiran <kiran@Kiran>
+Date:   Tue Oct 4 14:11:55 2016 +0545
+
+    store customer transaction details in multiple table completed
+
+[33mcommit 32a687b60ced2cdf885938500458d0a0eb431150[m
+Author: kiran <kiran@Kiran>
+Date:   Tue Oct 4 14:08:25 2016 +0545
+
+    store customer transaction details in multiple table completed
+
+[33mcommit a223d76754a745d912c45b41e23c4c6cf3564afe[m
+Author: kiran <kiran@Kiran>
+Date:   Mon Oct 3 22:10:42 2016 +0545
+
+    customer transaction details retriev completed
+
+[33mcommit 2ae33eface9a14533d436e136497676c12f2a9e4[m
+Author: kiran <kiran@Kiran>
+Date:   Mon Oct 3 20:59:50 2016 +0545
+
+    add new customer transaction details in single table completed
+
+[33mcommit 4ad04c839b3bf4907cc8df609518872a942e9036[m
+Author: kiran <kiran@Kiran>
+Date:   Mon Oct 3 11:14:08 2016 +0545
+
+    add new customer details completed
+
+[33mcommit 7279f900bd4789807e65dcfbc97b5c411c0a30ca[m
+Author: kiran <kiran@Kiran>
+Date:   Mon Oct 3 09:16:56 2016 +0545
+
+    add new laptop details completed
+
+[33mcommit d512462ab549d66f8008d21875ad374008ac64b6[m
+Author: kiran <kiran@Kiran>
+Date:   Sun Oct 2 19:48:13 2016 +0545
+
+    add new laptop brand completed
+
+[33mcommit 17c11986b7fc0dd31d0672fbb86c16ad87fb5587[m
+Author: kiran duwal <kiran duwal>
+Date:   Sun Oct 2 11:27:17 2016 +0545
+
+    add new user completed
+
+[33mcommit 4307dedcb3df3b49182a8c5c76fca72b6a0e22ec[m
+Author: kiran <kiran@Kiran>
+Date:   Sat Oct 1 22:06:38 2016 +0545
+
+    login process completed

@@ -18,14 +18,14 @@ import java.util.logging.Logger;
  */
 public class LaptopBrandManagement extends Database {
 
-    public boolean CreateNewLaptopBrand(LaptopBrandInfo objLapBrand) {
+    public boolean CreateNewLaptopBrand(LaptopBrandInfo objLapBrand) { // to add new laptop brand
         String sql = "insert into tbl_laptopbrand (laptopbrand_id, brandname)"
                 + " values (null,?)";
         boolean isLaptopBrandExist = false;
         try {
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, objLapBrand.getBrandname());
-         //   pstat.setInt(2, objLapBrand.getUserInfo().getUser_id());
+
             pstat.executeUpdate();
             pstat.close();
             CloseDbConnection();
@@ -37,7 +37,7 @@ public class LaptopBrandManagement extends Database {
         return (isLaptopBrandExist);
     }
 
-    public LaptopBrandInfo searchLaptopBrandById(int id) {
+    public LaptopBrandInfo searchLaptopBrandById(int id) { // to search laptop brand infomation by laptopbrand_id
         LaptopBrandInfo lapbrand = null;
         try {
             String query = "SELECT * FROM tbl_laptopbrand WHERE laptopbrand_id = ?";
@@ -62,7 +62,7 @@ public class LaptopBrandManagement extends Database {
         return lapbrand;
     }
 
-    public LaptopBrandInfo searchLaptopBrandByName(String name) {
+    public LaptopBrandInfo searchLaptopBrandByName(String name) { // to search laptop brand infomation by brandname
         LaptopBrandInfo lapbrand = null;
         try {
             String query = "SELECT * FROM tbl_laptopbrand WHERE brandname = ?";

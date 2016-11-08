@@ -44,8 +44,8 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         db.GetDbConnection();
         conn = db.conn;
         this.loggedInUserInfo = loggedInUserInfo;
-        showAllCustomerTransaction();
         fillComboCusName();
+        this.setLocationRelativeTo(null);
 //        fillComboLapModel();
     }
 
@@ -58,86 +58,26 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtSrhDate = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
-        btnLoadTable = new javax.swing.JButton();
-        txtSrhDue = new javax.swing.JTextField();
-        cmbFillDate = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblCustomerTransaction = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        btnPrint = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cmbCustomerName = new javax.swing.JComboBox();
         txtTotalCost = new javax.swing.JTextField();
         txtDue = new javax.swing.JTextField();
         txtPaid = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        txtSrhDate.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSrhDateKeyReleased(evt);
-            }
-        });
-
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        btnLoadTable.setText("Load Table");
-        btnLoadTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadTableActionPerformed(evt);
-            }
-        });
-
-        txtSrhDue.setText("with key due key relase srh");
-        txtSrhDue.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSrhDueKeyReleased(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "dd MMMMM yyyy", "dd.MM.yy", "MM/dd/yy", "yyyy.MM.dd G 'at' hh:mm:ss z", "EEE MMM d ''yy", "h:mm a", "H:mm:ss:SSS", "K:mm az", "yyyy.MMMMM.dd GGG hh:mm aaa" }));
-
-        tblCustomerTransaction.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        tblCustomerTransaction.setDragEnabled(true);
-        tblCustomerTransaction.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblCustomerTransactionMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblCustomerTransaction);
+        setTitle("Add Customer Transaction");
 
         jLabel2.setText("Due :");
 
-        btnPrint.setText("Print Report");
-        btnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Paid :");
 
-        cmbCustomerName.setEditable(true);
-        cmbCustomerName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "plz select customer id" }));
+        cmbCustomerName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "please select" }));
         cmbCustomerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCustomerNameActionPerformed(evt);
@@ -152,8 +92,6 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
 
         jLabel3.setText("Total cost :");
 
-        jLabel5.setText("Customer transaction Id :");
-
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,190 +99,86 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("Customer Id :");
+        jLabel6.setText("Customer  :");
+
+        btnCancel.setBackground(new java.awt.Color(255, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel7.setText("Add New Customer Transaction");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2))
+                                    .addComponent(btnSave))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDue, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnCancel)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtDue, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(162, 162, 162)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnLoadTable)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnSave))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtSrhDate, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(29, 29, 29)
-                                        .addComponent(btnSearch)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnPrint))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE))
+                                        .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtSrhDue, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134)
-                        .addComponent(cmbFillDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel6)))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbFillDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSrhDue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cmbCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLoadTable)
-                            .addComponent(btnSave)
-                            .addComponent(btnSearch)
-                            .addComponent(btnPrint)))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSrhDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(txtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtDue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnCancel))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showAllCustomerTransaction() {
-        cusTransMgmt = new CustomerTransactionManagement();
-        customerTransTbl = new DefaultTableModel();
-        ArrayList<CustomerTransactionInfo> cusTransactions = cusTransMgmt.listAllCustomerTransaction();
-        String[] columns = {"customer_transaction_id",/* "user_id",*/
-            "paid", "due", "total_cost", "date", "time", "customer_id"};
-        customerTransTbl.setColumnIdentifiers(columns);
-        for (CustomerTransactionInfo cusTransaction : cusTransactions) {
-            customerTransTbl.addRow(new Object[]{cusTransaction.getCusTransId(),/*cusTransaction.getCusInfo().getUserInfo().getUser_id(),*/
-                cusTransaction.getPaid(), cusTransaction.getDue(),
-                cusTransaction.getTotal_cost(), cusTransaction.getDate(),
-                cusTransaction.getTime(), cusTransaction.getCusInfo().getCustomer_id()});
-        }
-
-        tblCustomerTransaction.setModel(customerTransTbl);
-    }
-
-    private void txtSrhDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSrhDateKeyReleased
-        // TODO add your handling code here:
-        try {
-            String query = "select * from tbl_customer_transaction where customer_transaction_id LIKE '%" + txtSrhDate.getText() + "%'";
-            //-- String query = "select * from tbl_customer_transaction where due=?";
-            pstat = conn.prepareStatement(query);
-            //--  pstat.setString(1, txtSrhDate.getText());
-            rs = pstat.executeQuery();
-
-            tblCustomerTransaction.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        int count = tblCustomerTransaction.getModel().getRowCount();
-        if (count == 0) {
-            JOptionPane.showMessageDialog(null, "search data not found");
-        }
-    }//GEN-LAST:event_txtSrhDateKeyReleased
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        //        findCustomersTransactions();
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
-        // TODO add your handling code here:
-        showAllCustomerTransaction();
-    }//GEN-LAST:event_btnLoadTableActionPerformed
-
-    private void txtSrhDueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSrhDueKeyReleased
-        // TODO add your handling code here:
-        try {
-            String query = "select * from tbl_customer_transaction where due LIKE '%" + txtSrhDue.getText() + "%'";
-            //-- String query = "select * from tbl_customer_transaction where due=?";
-            pstat = conn.prepareStatement(query);
-            //--  pstat.setString(1, txtSrhDate.getText());
-            rs = pstat.executeQuery();
-
-            tblCustomerTransaction.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
-        int count = tblCustomerTransaction.getModel().getRowCount();
-        if (count == 0) {
-            JOptionPane.showMessageDialog(null, "search data not found");
-        }
-    }//GEN-LAST:event_txtSrhDueKeyReleased
-
-    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        // TODO add your handling code here:
-        MessageFormat header = new MessageFormat("Transaction Report");
-
-        MessageFormat footer = new MessageFormat("Page{0,number,interger}");
-
-        try {
-            tblCustomerTransaction.print(JTable.PrintMode.NORMAL, header, footer);
-        } catch (java.awt.print.PrinterException e) {
-            System.err.format("cantnot print %s%n", e.getMessage());
-        }
-    }//GEN-LAST:event_btnPrintActionPerformed
 
     private void cmbCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCustomerNameActionPerformed
         // TODO add your handling code here:
@@ -369,82 +203,49 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
         }
     }
 
-    /* private void fillComboLapModel() {
-     try {
-     String sql = "select model_no from tbl_laptop";
-     pstat = conn.prepareStatement(sql);
-     rs = pstat.executeQuery();
-
-     while (rs.next()) {
-     String lapModel = rs.getString("model_no");
-     cmbLapModel.addItem(lapModel);
-     }
-     } catch (Exception e) {
-     JOptionPane.showMessageDialog(null, "error = " + e);
-     }
-     }*/
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        CustomerTransactionInfo cusTransInfo = new CustomerTransactionInfo();
-        SupCtrl supCtrl = new SupCtrl();
 
-        String cusName = (String) cmbCustomerName.getSelectedItem();
-        CustomerInfo objcusTransInfo = supCtrl.findCustomerInfoByName(cusName);
-        cusTransInfo.setCusInfo(objcusTransInfo);
+        String paid = txtPaid.getText();
+        String total = txtTotalCost.getText();
 
-//        String lapModel = (String) cmbLapModel.getSelectedItem();
-//        LaptopInfo objLaptopInfo = supCtrl.findLaptopInfoByModel(lapModel);
-//        cusTransInfo.setLapInfo(objLaptopInfo);
-        cusTransInfo.setPaid(txtPaid.getText());
-        cusTransInfo.setDue(txtDue.getText());
-        cusTransInfo.setTotal_cost(txtTotalCost.getText());
-        cusTransInfo.setUserInfo(loggedInUserInfo);
-        //System.out.println(cusTransInfo.setUserInfo(loggedInUserInfo));
+        if (!Validate.checkEmpty(paid)) {
+            if (!Validate.checkEmpty(total)) {
+                CustomerTransactionInfo cusTransInfo = new CustomerTransactionInfo();
+                SupCtrl supCtrl = new SupCtrl();
 
-        CustomerTransactionManagement cusTransMgmt = new CustomerTransactionManagement();
+                String cusName = (String) cmbCustomerName.getSelectedItem();
+                CustomerInfo objcusTransInfo = supCtrl.findCustomerInfoByName(cusName);
+                cusTransInfo.setCusInfo(objcusTransInfo);
 
-        boolean isCustomerTransExist = cusTransMgmt.addNewCustomerTransaction(cusTransInfo);
-        if (isCustomerTransExist) {
-            showAllCustomerTransaction();
-            JOptionPane.showMessageDialog(null, "New customer transaction details added sucessfully!");
-            //reset();
+                cusTransInfo.setPaid(txtPaid.getText());
+                cusTransInfo.setDue(txtDue.getText());
+                cusTransInfo.setTotal_cost(txtTotalCost.getText());
+                cusTransInfo.setUserInfo(loggedInUserInfo);
+
+                CustomerTransactionManagement cusTransMgmt = new CustomerTransactionManagement();
+
+                boolean isCustomerTransExist = cusTransMgmt.addNewCustomerTransaction(cusTransInfo);
+                if (isCustomerTransExist) {
+                    JOptionPane.showMessageDialog(null, "New customer transaction details added sucessfully!");
+                    //reset();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error to create customer transaction details");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "total cost can not be empty");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Error to create customer transaction details");
+            JOptionPane.showMessageDialog(null, "paid can not be empty");
         }
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void tblCustomerTransactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerTransactionMouseClicked
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        try {
-
-            int row = tblCustomerTransaction.getSelectedRow();
-            String rowClick = (tblCustomerTransaction.getModel().getValueAt(row, 0).toString());
-            String sql = "select * from tbl_customer_transaction where customer_transaction_id='" + rowClick + "'";
-            pstat = conn.prepareStatement(sql);
-            rs = pstat.executeQuery();
-            if (rs.next()) {
-                String paid = rs.getString("paid");
-                txtPaid.setText(paid);
-                String due = rs.getString("due");
-                txtDue.setText(due);
-                String totalCost = rs.getString("total_cost");
-                txtTotalCost.setText(totalCost);
-//                String lname = rs.getString("last_name");
-//                txtLastName.setText(lname);
-//                String contact = rs.getString("contact_no");
-//                txtContactNo.setText(contact);
-//                String address = rs.getString("address");
-//                txtAddress.setText(address);
-//                String email = rs.getString("email");
-//                txtEmail.setText(email);
-
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }//GEN-LAST:event_tblCustomerTransactionMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,24 +290,16 @@ public class AddNewCustomerTransaction extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoadTable;
-    private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox cmbCustomerName;
-    private javax.swing.JComboBox cmbFillDate;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCustomerTransaction;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtDue;
     private javax.swing.JTextField txtPaid;
-    private javax.swing.JTextField txtSrhDate;
-    private javax.swing.JTextField txtSrhDue;
     private javax.swing.JTextField txtTotalCost;
     // End of variables declaration//GEN-END:variables
 }

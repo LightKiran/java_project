@@ -5,6 +5,9 @@
  */
 package edu.ncc.kiran.laptop_store_managent.views;
 
+import edu.ncc.kiran.laptop_store_managent.controllers.Database;
+import edu.ncc.kiran.laptop_store_managent.models.UserInfo;
+
 /**
  *
  * @author kiran
@@ -14,8 +17,15 @@ public class StaffDashboard extends javax.swing.JFrame {
     /**
      * Creates new form StaffDashboard
      */
-    public StaffDashboard() {
+    UserInfo loggedInUserInfo;
+    Database db = new Database();
+
+    public StaffDashboard(UserInfo loggedInUserInfo) {
         initComponents();
+        setLocationRelativeTo(null);
+        db.GetDbConnection();
+        // conn = Database.conn;
+        this.loggedInUserInfo = loggedInUserInfo;
     }
 
     /**
@@ -27,58 +37,190 @@ public class StaffDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuAdd = new javax.swing.JMenu();
+        jMenuItemCustomer = new javax.swing.JMenuItem();
+        jMenuItemCusTrans = new javax.swing.JMenuItem();
+        jMenuUpdateDeleteView = new javax.swing.JMenu();
+        jMenuItemCustomerUpdateDeleteView = new javax.swing.JMenuItem();
+        jMenuItemCustomerTransViewUpdateDelete = new javax.swing.JMenuItem();
+        logoutMenu = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Staff Dashboard");
+
+        jMenuAdd.setText("Add");
+
+        jMenuItemCustomer.setText("Customer");
+        jMenuItemCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemCustomer);
+
+        jMenuItemCusTrans.setText("Customer Transaction");
+        jMenuItemCusTrans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCusTransActionPerformed(evt);
+            }
+        });
+        jMenuAdd.add(jMenuItemCusTrans);
+
+        jMenuBar1.add(jMenuAdd);
+
+        jMenuUpdateDeleteView.setText("Update / Delete / View");
+
+        jMenuItemCustomerUpdateDeleteView.setText("Customer");
+        jMenuItemCustomerUpdateDeleteView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerUpdateDeleteViewActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteView.add(jMenuItemCustomerUpdateDeleteView);
+
+        jMenuItemCustomerTransViewUpdateDelete.setText("Customer Transaction");
+        jMenuItemCustomerTransViewUpdateDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerTransViewUpdateDeleteActionPerformed(evt);
+            }
+        });
+        jMenuUpdateDeleteView.add(jMenuItemCustomerTransViewUpdateDelete);
+
+        jMenuBar1.add(jMenuUpdateDeleteView);
+
+        logoutMenu.setBackground(new java.awt.Color(255, 102, 102));
+        logoutMenu.setForeground(new java.awt.Color(255, 51, 51));
+        logoutMenu.setText("Log out");
+        logoutMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(logoutMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 466, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerActionPerformed
+        // TODO add your handling code here:
+        final AddNewCustomer objaddAddNewCustomer = new AddNewCustomer(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objaddAddNewCustomer.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objaddAddNewCustomer.dispose();
+            }
+        });
+        objaddAddNewCustomer.setLocationRelativeTo(this);
+        objaddAddNewCustomer.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerActionPerformed
+
+    private void jMenuItemCustomerTransViewUpdateDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransViewUpdateDeleteActionPerformed
+        // TODO add your handling code here:
+        final ViewAllCustomerTransaction objViewAllCustomerTransaction = new ViewAllCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objViewAllCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllCustomerTransaction.dispose();
+            }
+        });
+        objViewAllCustomerTransaction.setLocationRelativeTo(this);
+        objViewAllCustomerTransaction.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerTransViewUpdateDeleteActionPerformed
+
+    private void jMenuItemCustomerUpdateDeleteViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerUpdateDeleteViewActionPerformed
+        // TODO add your handling code here:
+        final ViewAllCustomer objViewAllCustomer = new ViewAllCustomer(new javax.swing.JFrame(), true);
+        objViewAllCustomer.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objViewAllCustomer.dispose();
+            }
+        });
+        objViewAllCustomer.setLocationRelativeTo(this);
+        objViewAllCustomer.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCustomerUpdateDeleteViewActionPerformed
+
+    private void logoutMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMenuMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        UserLoginFrom ul = new UserLoginFrom();
+        ul.setVisible(true);
+    }//GEN-LAST:event_logoutMenuMouseClicked
+
+    private void jMenuItemCusTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCusTransActionPerformed
+        // TODO add your handling code here:
+                final AddNewCustomerTransaction objAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
+        objAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                objAddNewCustomerTransaction.dispose();
+            }
+        });
+        objAddNewCustomerTransaction.setLocationRelativeTo(this);
+        objAddNewCustomerTransaction.setVisible(true);
+        this.validate();
+    }//GEN-LAST:event_jMenuItemCusTransActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StaffDashboard().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StaffDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new StaffDashboard().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenuAdd;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemCusTrans;
+    private javax.swing.JMenuItem jMenuItemCustomer;
+    private javax.swing.JMenuItem jMenuItemCustomerTransViewUpdateDelete;
+    private javax.swing.JMenuItem jMenuItemCustomerUpdateDeleteView;
+    private javax.swing.JMenu jMenuUpdateDeleteView;
+    private javax.swing.JMenu logoutMenu;
     // End of variables declaration//GEN-END:variables
 }
