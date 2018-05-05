@@ -40,7 +40,6 @@ public class StaffDashboard extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdd = new javax.swing.JMenu();
         jMenuItemCustomer = new javax.swing.JMenuItem();
-        jMenuItemCusTrans = new javax.swing.JMenuItem();
         jMenuUpdateDeleteView = new javax.swing.JMenu();
         jMenuItemCustomerUpdateDeleteView = new javax.swing.JMenuItem();
         jMenuItemCustomerTransViewUpdateDelete = new javax.swing.JMenuItem();
@@ -58,14 +57,6 @@ public class StaffDashboard extends javax.swing.JFrame {
             }
         });
         jMenuAdd.add(jMenuItemCustomer);
-
-        jMenuItemCusTrans.setText("Customer Transaction");
-        jMenuItemCusTrans.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCusTransActionPerformed(evt);
-            }
-        });
-        jMenuAdd.add(jMenuItemCusTrans);
 
         jMenuBar1.add(jMenuAdd);
 
@@ -164,20 +155,6 @@ public class StaffDashboard extends javax.swing.JFrame {
         ul.setVisible(true);
     }//GEN-LAST:event_logoutMenuMouseClicked
 
-    private void jMenuItemCusTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCusTransActionPerformed
-        // TODO add your handling code here:
-                final AddNewCustomerTransaction objAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
-        objAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                objAddNewCustomerTransaction.dispose();
-            }
-        });
-        objAddNewCustomerTransaction.setLocationRelativeTo(this);
-        objAddNewCustomerTransaction.setVisible(true);
-        this.validate();
-    }//GEN-LAST:event_jMenuItemCusTransActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -216,7 +193,6 @@ public class StaffDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemCusTrans;
     private javax.swing.JMenuItem jMenuItemCustomer;
     private javax.swing.JMenuItem jMenuItemCustomerTransViewUpdateDelete;
     private javax.swing.JMenuItem jMenuItemCustomerUpdateDeleteView;

@@ -67,7 +67,7 @@ public class CustomerTransactionManagement extends Database {
             }
 
             int cusId2 = objCusTransInfo.getCusInfo().getCustomer_id();
-            System.out.println("Customer id2" + cusId2);
+            System.out.println("Customer id : - " + cusId2);
 
             String sql3 = "insert into tbl_user_customer_transaction(user_id,customer_transaction_id,customer_id) "
                     + "values(" + hey2 + "," + customerMaxTransID + "," + cusId2 + ")";

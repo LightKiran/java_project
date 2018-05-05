@@ -28,7 +28,9 @@ public class CustomerManagement extends Database {
         supCtr = new SupCtrl();
     }
 
-    private int customerMaxID, lapModel;
+    private int customerMaxID, lapModel, checkExist;
+    
+    
 
     public boolean addNewCustomer(CustomerInfo objCusInfo) { // to add new customer information
         boolean isCustomerNameExist = false;
@@ -49,6 +51,7 @@ public class CustomerManagement extends Database {
             ResultSet rs = conn.createStatement().executeQuery("select MAX(customer_id) from tbl_customer");
 
             if (rs.next()) {
+                checkExist = this.pstat.executeUpdate();
                 customerMaxID = rs.getInt(1);
                 System.out.println("Recent input value of pk is  " + customerMaxID);
             }
@@ -58,16 +61,15 @@ public class CustomerManagement extends Database {
 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "please select laptop model");
-                
             }
-            int checkExist = this.pstat.executeUpdate();
+            int checkExist1 = this.pstat.executeUpdate();
             String sql3 = "insert into tbl_customer_laptop(customer_id, laptop_id) "
                     + "values(" + customerMaxID + "," + lapModel + ")";
 
             pstat = conn.prepareStatement(sql3);
             int checkExist2 = this.pstat.executeUpdate();
 
-            if (checkExist > 0 || checkExist2 > 0) {
+            if (checkExist > 0 || checkExist1 > 0 || checkExist2 > 0) {
                 isCustomerNameExist = true;
             }
 

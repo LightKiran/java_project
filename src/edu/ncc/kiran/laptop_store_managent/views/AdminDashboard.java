@@ -49,7 +49,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenuItemLaptopBrand = new javax.swing.JMenuItem();
         jMenuItemLaptop = new javax.swing.JMenuItem();
         jMenuItemCustomer = new javax.swing.JMenuItem();
-        jMenuItemCustomerTransaction = new javax.swing.JMenuItem();
         jMenuItemSupplier = new javax.swing.JMenuItem();
         jMenuItemOrder = new javax.swing.JMenuItem();
         jMenuUpdateDeleteSearch = new javax.swing.JMenu();
@@ -107,14 +106,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
         jMenuAdd.add(jMenuItemCustomer);
-
-        jMenuItemCustomerTransaction.setText("Customer Transaction");
-        jMenuItemCustomerTransaction.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCustomerTransactionActionPerformed(evt);
-            }
-        });
-        jMenuAdd.add(jMenuItemCustomerTransaction);
 
         jMenuItemSupplier.setText("Supplier");
         jMenuItemSupplier.addActionListener(new java.awt.event.ActionListener() {
@@ -387,20 +378,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         ul.setVisible(true);
     }//GEN-LAST:event_logoutMenuMouseClicked
 
-    private void jMenuItemCustomerTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerTransactionActionPerformed
-        // TODO add your handling code here:
-        final AddNewCustomerTransaction objAddNewCustomerTransaction = new AddNewCustomerTransaction(new javax.swing.JFrame(), true, loggedInUserInfo);
-        objAddNewCustomerTransaction.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                objAddNewCustomerTransaction.dispose();
-            }
-        });
-        objAddNewCustomerTransaction.setLocationRelativeTo(this);
-        objAddNewCustomerTransaction.setVisible(true);
-        this.validate();
-    }//GEN-LAST:event_jMenuItemCustomerTransactionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -446,7 +423,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemCustomer;
     private javax.swing.JMenuItem jMenuItemCustomerTransViewUpdate;
-    private javax.swing.JMenuItem jMenuItemCustomerTransaction;
     private javax.swing.JMenuItem jMenuItemCustomerViewUpdate;
     private javax.swing.JMenuItem jMenuItemLaptop;
     private javax.swing.JMenuItem jMenuItemLaptopBrand;
